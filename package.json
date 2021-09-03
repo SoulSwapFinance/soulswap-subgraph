@@ -1,0 +1,28 @@
+{
+  "name": "@soulswap/subgraphs",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "subgraphs/*"
+  ],
+  "scripts": {
+    "build": "yarn workspaces run build",
+    "codegen": "yarn workspaces run codegen",
+    "prepare:fantom": "yarn workspaces run prepare:fantom"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.20.0",
+    "@graphprotocol/graph-ts": "^0.20.0",
+    "@soulswap/swap-core": "^0.0.3",
+    "@sushiswap/prettier-config": "^0.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "@typescript-eslint/parser": "^4.0.0",
+    "ejs": "^3.1.6",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.0.0",
+    "handlebars": "^4.7.7",
+    "mustache": "^4.2.0",
+    "prettier": "^2.0.0",
+    "typescript": "^4.0.0"
+  }
+}
