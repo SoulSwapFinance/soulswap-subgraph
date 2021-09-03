@@ -1,0 +1,15 @@
+{
+    "name": "@soulswap/subgraph-abis",
+    "version": "1.0.0",
+    "description": "Abis",
+    "license": "MIT",
+    "private": true,
+    "files": [
+        "./*.json"
+    ],
+    "scripts": {
+        "codegen": ".",
+        "build": ".",
+        "prepare:fantom": "."
+    }
+}
