@@ -1,0 +1,92 @@
+specVersion: 0.0.1
+description: SoulSummoner
+repository: https://github.com/SoulSwapFinance/soulswap-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SoulSummoner
+    network: {{ network }}
+    source:
+      address: '{{ address }}'
+      abi: SoulSummoner
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.1
+      language: wasm/assemblyscript
+      file: ./src/mappings/soulsummoner.ts
+      entities:
+        - SoulSummoner
+        - Pool
+        - User
+        - Rewarder
+      abis:
+        - name: SoulSummoner
+          file: ./packages/abis/SoulSummoner.json
+        - name: ConvexRewarder
+          file: ./packages/abis/ConvexRewarder.json
+        - name: ComplexRewarder
+          file: ./packages/abis/ComplexRewarder.json
+        - name: CloneRewarderTime
+          file: ./packages/abis/CloneRewarderTime.json
+        - name: StakingRewardsSoul
+          file: ./packages/abis/StakingRewardsSoul.json
+        - name: Factory
+          file: ../../node_modules/@soulswap/swap-core/build/abi/SoulSwapFactory.json
+        - name: Pair
+          file: ../../node_modules/@soulswap/swap-core/build/abi/SoulSwapPair.json
+        - name: ERC20
+          file: ../../node_modules/@soulswap/swap-core/build/abi/ERC20.json
+      eventHandlers:
+        - event: Deposit(indexed address,indexed uint256,uint256,indexed address)
+          handler: deposit
+        - event: Withdraw(indexed address,indexed uint256,uint256,indexed address)
+          handler: withdraw
+        - event: EmergencyWithdraw(indexed address,indexed uint256,uint256,indexed address)
+          handler: emergencyWithdraw
+        - event: Harvest(indexed address,indexed uint256,uint256)
+          handler: harvest
+        - event: LogPoolAddition(indexed uint256,uint256,indexed address,indexed address)
+          handler: logPoolAddition
+        - event: LogSetPool(indexed uint256,uint256,indexed address,bool)
+          handler: logSetPool
+        - event: LogUpdatePool(indexed uint256,uint64,uint256,uint256)
+          handler: logUpdatePool
+templates:
+  - kind: ethereum/contract
+    name: CloneRewarderTime
+    network: {{ network }}
+    source:
+      abi: CloneRewarderTime
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.1
+      language: wasm/assemblyscript
+      file: ./src/mappings/clone-rewarder.ts
+      entities:
+        - Rewarder
+      abis:
+        - name: CloneRewarderTime
+          file: ./packages/abis/CloneRewarderTime.json
+      eventHandlers:
+        - event: LogRewardPerSecond(uint256)
+          handler: logRewardPerSecond
+  - kind: ethereum/contract
+    name: StakingRewardsSoul
+    network: {{ network }}
+    source:
+      abi: StakingRewardsSoul
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.1
+      language: wasm/assemblyscript
+      file: ./src/mappings/staking-rewarder.ts
+      entities:
+        - Rewarder
+      abis:
+        - name: StakingRewardsSoul
+          file: ./packages/abis/StakingRewardsSoul.json
+      eventHandlers:
+        - event: RewardAdded(uint256)
+          handler: rewardAdded

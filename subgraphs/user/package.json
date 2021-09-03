@@ -1,0 +1,12 @@
+{
+    "name": "user",
+    "license": "MIT",
+    "version": "1.0.0",
+    "author": "SoulSwap",
+    "scripts": {
+        "codegen": "graph codegen subgraph.yaml",
+        "build": "graph build subgraph.yaml",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswap/user subgraph.yaml",
+        "prepare": "mustache config/fantom.json template.yaml > subgraph.yaml"
+    }
+}
