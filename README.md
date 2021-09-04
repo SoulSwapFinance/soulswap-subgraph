@@ -79,3 +79,11 @@ We will add to this as development progresses.
 
 # COMMUNITY SUBGRAPHS
 - Always welcome (encouraged)
+
+Build completed: QmTjRQdiiRiddevaHEeecUmVAV3Jd8gyvGUNhnCS4aLe5r
+
+Deployed to https://thegraph.com/studio/subgraph/soulswap
+
+Subgraph endpoints:
+Queries (HTTP):     https://api.studio.thegraph.com/query/3838/soulswap/v0.1.0
+Subscriptions (WS): https://api.studio.thegraph.com/query/3838/soulswap/v0.1.0

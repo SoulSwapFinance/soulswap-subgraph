@@ -41,7 +41,7 @@ import {
   updatePairDayData,
   updatePairHourData,
   updateTokenDayData,
-} from "../enitites";
+} from "../enitities";
 import { findEthPerToken, getEthPrice } from "../pricing";
 
 const BLACKLIST_EXCHANGE_VOLUME: string[] = [

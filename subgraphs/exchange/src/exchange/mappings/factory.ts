@@ -1,4 +1,4 @@
-import { getFactory, getPair } from "../enitites";
+import { getFactory, getPair } from "../enitities";
 
 import { BIG_INT_ONE } from "const";
 import { PairCreated } from "../../../generated/Factory/Factory";

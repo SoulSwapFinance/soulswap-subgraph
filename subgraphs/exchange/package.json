@@ -13,8 +13,8 @@
         "remove-local": "graph remove --node http://localhost:8020/ /soulswap/soulswap",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswap/soulswap",
 
-        "deploy:fantom": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswap/fantom-exchange subgraph.yaml",
-        "deploy-studio:fantom": "graph deploy --studio soul---fantom-exchange",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/19f9dac78be1016d948ace904f0566b7 --ipfs https://api.thegraph.com/ipfs/ soulswap/exchange subgraph.yaml",
+        "deploy-studio": "graph deploy --studio soulswap --access-token 19f9dac78be1016d948ace904f0566b7",
         "prepare:fantom": "mustache ../../config/fantom.json template.yaml > subgraph.yaml"
     }
 }
