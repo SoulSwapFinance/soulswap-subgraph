@@ -20,9 +20,9 @@ dataSources:
         - User
       abis:
         - name: Factory
-          file: ../../node_modules/@soulswap/swap-core/build/abi/SoulSwapFactory.json
+          file: ../../packages/abis/SoulSwapFactory.json
         - name: Pair
-          file: ../../node_modules/@soulswap/swap-core/build/abi/SoulSwapPair.json
+          file: ../../packages/abis/SoulSwapPair.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: onPairCreated
@@ -41,9 +41,9 @@ templates:
         - User
       abis:
         - name: Pair
-          file: ../../node_modules/@soulswap/swap-core/build/abi/SoulSwapPair.json
+          file: ../../packages/abis/SoulSwapPair.json
         - name: Factory
-          file: ../../node_modules/@soulswap/swap-core/build/abi/SoulSwapFactory.json
+          file: ../../packages/abis/SoulSwapFactory.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: onTransfer

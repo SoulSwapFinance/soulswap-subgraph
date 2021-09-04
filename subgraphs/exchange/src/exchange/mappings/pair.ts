@@ -1,7 +1,7 @@
 import {
   ADDRESS_ZERO,
   BIG_DECIMAL_ZERO,
-  SOUL_SUMMONER_ADDRESS,
+  // SOUL_SUMMONER_ADDRESS,
   MINIMUM_USD_THRESHOLD_NEW_PAIRS,
   WHITELIST,
 } from "const";
@@ -24,7 +24,7 @@ import {
 import {
   Burn as BurnEvent,
   Mint as MintEvent,
-  Pair as PairContract,
+  // Pair as PairContract,
   Swap as SwapEvent,
   Sync as SyncEvent,
   Transfer as TransferEvent,

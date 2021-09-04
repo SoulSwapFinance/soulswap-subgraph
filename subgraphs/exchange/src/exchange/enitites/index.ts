@@ -1,5 +1,5 @@
 // Bar Position
-// export * from './bar-position'
+// export * from './bound-position'
 
 // Bundle
 export * from './bundle'

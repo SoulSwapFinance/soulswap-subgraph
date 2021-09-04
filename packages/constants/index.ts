@@ -35,11 +35,14 @@ export const SOUL_SUMMONER_START_BLOCK = BigInt.fromI32(10750000);
 
 export const ACC_SOUL_PRECISION = BigInt.fromString("1000000000000");
 
-export const FACTORY_ADDRESS = Address.fromString("");
+export const FACTORY_ADDRESS = Address.fromString("0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF");
 
 export const SOUL_SUMMONER_ADDRESS = Address.fromString(
   ""
 );
+
+export const SOUL_ETH_PAIR_FIRST_LIQUDITY_BLOCK = BigInt.fromI32(16110304);
+
 
 export const SPELL_BOUND_ADDRESS = Address.fromString("");
 
@@ -47,8 +50,8 @@ export const SOUL_REAPER_ADDRESS = Address.fromString(
   ""
 );
 
-export const SOUL_POWER_ADDRESS = Address.fromString(
-  ""
+export const SOUL_ADDRESS = Address.fromString(
+  "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07"
 );
 
 export const SOUL_FUSD_PAIR_ADDRESS = Address.fromString(
@@ -67,13 +70,13 @@ export const SOUL_DISTRIBUTOR_ADDRESS = Address.fromString(
   ""
 );
 
-export const USDC_WETH_PAIR = ""; // TODO: insert all addresses
+export const USDC_WETH_PAIR = "0x160653F02b6597E7Db00BA8cA826cf43D2f39556"; // TODO: insert all addresses
 
-export const DAI_WETH_PAIR = "";
+export const DAI_WETH_PAIR = "0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b";
 
-export const FUSD_WETH_PAIR = "";
+export const FUSD_WETH_PAIR = "0x1AE16105a7d4bE7DFD9737FD13D9A50AEFed1437";
 
-export const SOUL_FUSD_PAIR = "";
+export const SOUL_FUSD_PAIR = "0x9e7711eaeb652d0da577c1748844407f8db44a10";
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
 export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString(
@@ -85,32 +88,17 @@ export const MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString(
   "10"
 );
 
-export const WETH_ADDRESS = Address.fromString("");
+export const WETH_ADDRESS = Address.fromString("0x74b23882a30290451a17c44f4f05243b6b58c76d");
 
-export const SOULSWAP_WETH_FUSD_PAIR_ADDRESS = Address.fromString(
-  ""
-);
+export const FUSD_ADDRESS = Address.fromString("0xad84341756bf337f5a0164515b1f6f993d194e1f");
 
-export const FUSD_ADDRESS = Address.fromString("");
+export const NATIVE = Address.fromString("0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83");
 
-export const COMPLEX_REWARDER = Address.fromString(
-  "0x0000000000000000000000000000000000000000"
-);
+export const USDC = "0x04068da6c83afcfa0e13ba15a6696662335d5b75";
 
-export const CONVEX_REWARDERS: Array<Address> = [Address.fromString(''), Address.fromString('')]
+export const FUSD = "0xad84341756bf337f5a0164515b1f6f993d194e1f";
 
-export const ALCX_REWARDER = Address.fromString('')
-
-export const LIDO_REWARDER = Address.fromString('')
-
-export const NATIVE = Address.fromString("");
-
-export const USDC = "";
-
-export const FUSD = "";
-
-export const DAI = "";
+export const DAI = "0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e";
 
 export const WHITELIST: string[] = ",".split(",");
-
-const CUSTOM_BASES = new Map<string,string>();
+// const CUSTOM_BASES = new Map<string,string>();

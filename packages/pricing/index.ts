@@ -5,12 +5,10 @@ import {
   BIG_DECIMAL_ONE,
   BIG_DECIMAL_ZERO,
   FACTORY_ADDRESS,
-  SOUL_TOKEN_ADDRESS,
+  SOUL_ADDRESS,
   SOUL_FUSD_PAIR_ADDRESS,
-  SOULSWAP_FACTORY_ADDRESS,
-  SOULSWAP_SOUL_ETH_PAIR_FIRST_LIQUDITY_BLOCK,
-  SOULSWAP_SOUL_FUSD_PAIR_ADDRESS,
-  SOULSWAP_WETH_FUSD_PAIR_ADDRESS,
+  SOUL_ETH_PAIR_FIRST_LIQUDITY_BLOCK,
+  FUSD_WETH_PAIR,
   FUSD_ADDRESS,
   WETH_ADDRESS,
 } from "const";
@@ -29,18 +27,12 @@ export function getUSDRate(token: Address, block: ethereum.Block): BigDecimal {
   const usdt = BIG_DECIMAL_ONE;
 
   if (token != FUSD_ADDRESS) {
-    const address = block.number.le(BigInt.fromI32(10829344))
-      ? SOULSWAP_WETH_FUSD_PAIR_ADDRESS
-      : SOULSWAP_WETH_FUSD_PAIR_ADDRESS;
-
+    const address = FUSD_WETH_PAIR;
     const tokenPriceETH = getEthRate(token, block);
-
     const pair = PairContract.bind(address);
 
     const reserves = pair.getReserves();
-
     const reserve0 = reserves.value0.toBigDecimal().times(BIG_DECIMAL_1E18);
-
     const reserve1 = reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18);
 
     const ethPriceUSD = reserve1
@@ -58,16 +50,12 @@ export function getEthRate(token: Address, block: ethereum.Block): BigDecimal {
   let eth = BIG_DECIMAL_ONE;
 
   if (token != WETH_ADDRESS) {
-    const factory = FactoryContract.bind(
-      block.number.le(BigInt.fromI32(10829344))
-        ? SOULSWAP_FACTORY_ADDRESS
-        : FACTORY_ADDRESS
-    );
+    const factory = FactoryContract.bind(FACTORY_ADDRESS);
 
     const address = factory.getPair(token, WETH_ADDRESS);
 
     if (address == ADDRESS_ZERO) {
-      log.info("Adress ZERO...", []);
+      log.info("Address ZERO...", []);
       return BIG_DECIMAL_ZERO;
     }
 
@@ -93,19 +81,15 @@ export function getEthRate(token: Address, block: ethereum.Block): BigDecimal {
 }
 
 export function getSoulPrice(block: ethereum.Block): BigDecimal {
-  if (block.number.lt(SOULSWAP_SOUL_ETH_PAIR_FIRST_LIQUDITY_BLOCK)) {
-    // If before soulswap soul-eth pair creation and liquidity added, return zero
+  if (block.number.lt(SOUL_ETH_PAIR_FIRST_LIQUDITY_BLOCK)) {
+    // if before soul-eth pair creation and liquidity added, return zero
     return BIG_DECIMAL_ZERO;
   } else if (block.number.lt(BigInt.fromI32(10800029))) {
-    // Else if before soulswap soul-fusd pair creation (get price from eth soul-eth pair above)
-    return getUSDRate(SOUL_TOKEN_ADDRESS, block);
+    // else if before soul-fusd pair creation (get price from eth soul-eth pair above)
+    return getUSDRate(SOUL_ADDRESS, block);
   } else {
-    // Else get price from either uni or soul fusd pair depending on space-time
-    const pair = PairContract.bind(
-      block.number.le(BigInt.fromI32(10829344))
-        ? SOULSWAP_SOUL_FUSD_PAIR_ADDRESS
-        : SOUL_FUSD_PAIR_ADDRESS
-    );
+    // else get price from soul-fusd pair depending on space-time
+    const pair = PairContract.bind(SOUL_FUSD_PAIR_ADDRESS);
     const reserves = pair.getReserves();
     return reserves.value1
       .toBigDecimal()
