@@ -12,7 +12,6 @@
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswap/soulswap",
 
         "deploy:fantom": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswap/soul-summoner subgraph.yaml",
-
-        "prepare:fantom": "mustache config/fantom.json template.yaml > subgraph.yaml",
+        "prepare:fantom": "mustache config/fantom.json template.yaml > subgraph.yaml"
     }
 }
