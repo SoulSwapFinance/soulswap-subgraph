@@ -60,10 +60,6 @@ This query fetches aggredated data from all soulswap pairs and tokens, to give a
 
 ## Output
 ```
-$ graph deploy soulswap-fantom
-✔ Product for which to deploy · subgraph-studio
-✔ Version Label (e.g. v0.0.1) · v1.2.0
-
 ✔ Apply migrations
 ✔ Load subgraph from subgraph.yaml
   Compile data source: Factory => build/Factory/Factory.wasm
@@ -100,9 +96,10 @@ $ graph deploy soulswap-fantom
 
 Build completed: QmY5PyCJcR9M3MkLuLSCWkK9g4anJ3QfVpbaZ2iXF2QEjc
 
-Deployed to https://thegraph.com/studio/subgraph/soulswap-fantom
+Deployed to https://thegraph.com/explorer/subgraph/soulswapfinance/exchange
 
 Subgraph endpoints:
-Queries (HTTP):     https://api.studio.thegraph.com/query/3838/soulswap-fantom/v1.2.0
-Subscriptions (WS): https://api.studio.thegraph.com/query/3838/soulswap-fantom/v1.2.0
+Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/exchange
+Subscriptions (WS): wss://api.thegraph.com/subgraphs/name/soulswapfinance/exchange
+
 ```
