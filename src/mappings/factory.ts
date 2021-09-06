@@ -18,7 +18,7 @@ export function handleNewPair(event: PairCreated): void {
   let factory = SoulSwapFactory.load(FACTORY_ADDRESS)
   if (factory === null) {
     factory = new SoulSwapFactory(FACTORY_ADDRESS)
-    factory.pairCount = 0
+    factory.totalPairs = 0
     factory.totalVolumeETH = ZERO_BD
     factory.totalLiquidityETH = ZERO_BD
     factory.totalVolumeUSD = ZERO_BD
@@ -31,7 +31,7 @@ export function handleNewPair(event: PairCreated): void {
     bundle.ethPrice = ZERO_BD
     bundle.save()
   }
-  factory.pairCount = factory.pairCount + 1
+  factory.totalPairs = factory.totalPairs + 1
   factory.save()
 
   // create the tokens
