@@ -3,7 +3,7 @@ type SoulSwapFactory @entity {
   id: ID!
 
   # pair info
-  pairCount: Int!
+  totalPairs: Int!
 
   # total volume
   totalVolumeUSD: BigDecimal!

@@ -51,7 +51,7 @@ This query fetches aggredated data from all soulswap pairs and tokens, to give a
 ```graphql
 {
   soulSwapFactories(first: 1) {
-    pairCount
+    totalPairs
     totalVolumeUSD
     totalLiquidityUSD
   }
@@ -60,6 +60,12 @@ This query fetches aggredated data from all soulswap pairs and tokens, to give a
 
 ## Output
 ```
+Deploy key set for https://api.thegraph.com/deploy/
+Unis-MBP:soulswap-subgraph unico$ graph deploy --product hosted-service soulswapfinance/exchange-fantom
+  Skip migration: Bump mapping apiVersion from 0.0.1 to 0.0.2
+  Skip migration: Bump mapping apiVersion from 0.0.2 to 0.0.3
+  Skip migration: Bump mapping apiVersion from 0.0.3 to 0.0.4
+  Skip migration: Bump mapping specVersion from 0.0.1 to 0.0.2
 ✔ Apply migrations
 ✔ Load subgraph from subgraph.yaml
   Compile data source: Factory => build/Factory/Factory.wasm
@@ -75,7 +81,7 @@ This query fetches aggredated data from all soulswap pairs and tokens, to give a
   Write subgraph manifest build/subgraph.yaml
 ✔ Write compiled subgraph to build/
   Add file to IPFS build/schema.graphql
-                .. QmaKJE85VCmu6GDRrj7c5hMwHirEJBjvzWrwkjfYTCsWk1
+                .. QmaQdcHnNgWwEQo3sEChEoQT1mUyDyxvp56vLNRtXPM5TE
   Add file to IPFS build/Factory/abis/factory.json
                 .. QmXj1p6rKNSYF78nHcuAFfBnSyyHgxF6d2itS2S18gwiaA
   Add file to IPFS build/Factory/abis/ERC20.json
@@ -85,21 +91,42 @@ This query fetches aggredated data from all soulswap pairs and tokens, to give a
   Add file to IPFS build/Factory/abis/ERC20NameBytes.json
                 .. QmQCP6Pdp1MqpwRv2qoPHuUTwZGy7Q3eDHg4w5kzwE9mBj
   Add file to IPFS build/Factory/Factory.wasm
-                .. QmPAW1ixUG5itEmPuCDtpDuyJqRnCUAQwAwScZgBndUC4T
+                .. QmQsrWP8oJQq4RMg5Ckc8sDoUoz62Mnf1p6vPq2etq8b4X
   Add file to IPFS build/Pair/abis/pair.json
                 .. QmbPLMADBP8L6LBVP3ZBQ8RgG7ghamD8DvbdUxHAjZrLgm
   Add file to IPFS build/Pair/abis/factory.json
                 .. QmXj1p6rKNSYF78nHcuAFfBnSyyHgxF6d2itS2S18gwiaA (already uploaded)
   Add file to IPFS build/templates/Pair/Pair.wasm
-                .. Qmav1yUVULAg6j8TkHm4ueL6rDxqVjUdpvogqE1hqbow1v
+                .. QmT5PxDTBaXGkPsXgo3WctHX45b5atRpqUrnpXfFKBvCNB
 ✔ Upload subgraph to IPFS
 
-Build completed: QmY5PyCJcR9M3MkLuLSCWkK9g4anJ3QfVpbaZ2iXF2QEjc
+Build completed: QmY2vKEAXZz17JRDgg26vrXGBvGepzQfkXt26CyxLVgqcs
 
-Deployed to https://thegraph.com/explorer/subgraph/soulswapfinance/exchange
+Deployed to https://thegraph.com/explorer/subgraph/soulswapfinance/exchange-fantom
 
 Subgraph endpoints:
-Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/exchange
-Subscriptions (WS): wss://api.thegraph.com/subgraphs/name/soulswapfinance/exchange
+Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/exchange-fantom
+Subscriptions (WS): wss://api.thegraph.com/subgraphs/name/soulswapfinance/exchange-fantom
 
 ```
+
+## Graph Commands
+
+### **Installation**
+* `npm install -g @graphprotocol/graph-cli`
+<br>
+* `yarn global add @graphprotocol/graph-cli`
+<br>
+### **Initialization**
+* `npm install -gg @graphprotocol/graph/cli`
+<br>
+* `yarn global add @graphprotocol/graphcli`
+<br>
+
+### **Deployment**
+* `graph auth --product hosted-service <ACCESS_TOKEN>
+`
+<br>
+* `graph deploy --product hosted-service <GITHUB_USER>/<SUBGRAPH NAME>`
+
+### Redeployment
