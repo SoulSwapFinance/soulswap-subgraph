@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Factory
-    network: fantom
+    network: {{ network }}
     source:
-      address: '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF'
+      address: '{{ factory.address }}'
       abi: Factory
-      startBlock: 16108819
+      startBlock: {{ factory.startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -20,24 +20,24 @@ dataSources:
         - Factory
       abis:
         - name: Factory
-          file: abis/factory.json
+          file: ../abi/factory.json
         - name: Pair
-          file: abis/pair.json
+          file: ../abi/pair.json
         - name: SoulPower
-          file: abis/soul.json
+          file: ../abi/soul.json
         - name: ERC20
-          file: abis/ERC20.json
+          file: ../abi/ERC20.json
         - name: ERC20SymbolBytes
-          file: abis/ERC20SymbolBytes.json
+          file: ../abis/ERC20SymbolBytes.json
         - name: ERC20NameBytes
-          file: abis/ERC20NameBytes.json
+          file: ../abis/ERC20NameBytes.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
           handler: onPairCreated
 templates:
   - kind: ethereum/contract
     name: Pair
-    network: fantom
+    network: {{ network }}
     source:
       abi: Pair
     mapping:
@@ -59,9 +59,9 @@ templates:
         - User
       abis:
         - name: Factory
-          file: abis/factory.json
+          file: ../abi/factory.json
         - name: Pair
-          file: abis/pair.json
+          file: ../abi/pair.json
       eventHandlers:
         - event: Mint(indexed address,uint256,uint256)
           handler: onMint

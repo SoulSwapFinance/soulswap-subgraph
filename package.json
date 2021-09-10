@@ -1,26 +1,22 @@
 {
-  "name": "soulswap-subgraph",
-  "version": "1.0.0",
-  "repository": "https://github.com/SoulSwapFinance/soulswap-subgraph",
-  "license": "GPL-3.0-or-later",
-  "scripts": {
-    "codegen": "graph codegen --output-dir src/types/",
-    "build": "graph build",
-    "auth": "graph auth",
-    "create-local": "graph create soulswapfinance/exchange-fantom --node http://127.0.0.1:8020",
-    "deploy-local": "graph deploy soulswapfinance/exchange-fantom --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
-    "deploy": "graph deploy soulswapfinance/exchange-fantom --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
-    "deploy-staging": "graph deploy $THE_GRAPH_GITHUB_USER/$THE_GRAPH_SUBGRAPH_NAME /SoulSwapFinance --ipfs https://api.staging.thegraph.com/ipfs/ --node https://api.staging.thegraph.com/deploy/",
-    "watch-local": "graph deploy graphprotocol/SoulSwapFinance --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
-  },
-  "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.16.0",
-    "@graphprotocol/graph-ts": "^0.16.0",
-    "@typescript-eslint/eslint-plugin": "^2.0.0",
-    "@typescript-eslint/parser": "^2.0.0",
-    "eslint": "^6.2.2",
-    "eslint-config-prettier": "^6.1.0",
-    "prettier": "^1.18.2",
-    "typescript": "^3.5.2"
-  }
+    "name": "soulswap-subgraph",
+    "license": "MIT",
+    "version": "1.0.0",
+    "author": "SoulSwap",
+    "files": [
+        "generated"
+    ],
+    "scripts": {
+        "codegen": "graph codegen subgraph.yaml",
+        "build": "graph build subgraph.yaml",
+        "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/soulswap",
+        "remove-local": "graph remove --node http://localhost:8020/ /soulswapfinance/soulswap",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/soulswap",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/fantom-exchange subgraph.yaml",
+        "deploy-studio": "graph deploy --studio soulswap---fantom-exchange",
+        "prepare": "mustache ../../config/fantom.json template.yaml > subgraph.yaml"
+    },
+    "dependencies": {
+        "@graphprotocol/graph-ts": "^0.20.0"
+    }
 }
