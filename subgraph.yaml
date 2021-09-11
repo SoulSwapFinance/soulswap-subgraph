@@ -1,5 +1,5 @@
-specVersion: 0.0.3
-description: Exchange
+specVersion: 0.0.2
+description: SoulSwap is a decentralized protocol for automated token exchange on Ethereum.
 repository: https://github.com/soulswapfinance/soulswap-subgraph
 schema:
   file: ./schema.graphql
@@ -17,23 +17,40 @@ dataSources:
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
-        - Factory
+        - Pair
+        - Token
       abis:
         - name: Factory
-          file: abis/factory.json
-        - name: Pair
-          file: abis/pair.json
-        - name: SoulPower
-          file: abis/soul.json
+          file: ./abis/factory.json
         - name: ERC20
-          file: abis/ERC20.json
+          file: ./abis/ERC20.json
         - name: ERC20SymbolBytes
-          file: abis/ERC20SymbolBytes.json
+          file: ./abis/ERC20SymbolBytes.json
         - name: ERC20NameBytes
-          file: abis/ERC20NameBytes.json
+          file: ./abis/ERC20NameBytes.json
       eventHandlers:
         - event: PairCreated(indexed address,indexed address,address,uint256)
-          handler: onPairCreated
+          handler: handleNewPair
+  - kind: ethereum/contract
+    name: StakingRewardsFactory
+    network: fantom
+    source:
+      address: '0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF'
+      abi: StakingRewardsFactory
+      startBlock: 16108819
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/staking-rewards.ts
+      entities:
+        - Distribution
+      abis:
+        - name: StakingRewardsFactory
+          file: ./abis/staking-rewards-factory.json
+      eventHandlers:
+        - event: DistributionCreated(address,address)
+          handler: handleDistributionCreation
 templates:
   - kind: ethereum/contract
     name: Pair
@@ -44,32 +61,56 @@ templates:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
-      file: ./src/mappings/pair.ts
+      file: ./src/mappings/core.ts
       entities:
-        - Bundle
-        - Burn
-        - LiquidityPosition
-        - LiquidityPositionSnapshot
-        - Mint
         - Pair
-        - Swap
-        - Sync
         - Token
-        - Transaction
-        - User
       abis:
-        - name: Factory
-          file: abis/factory.json
         - name: Pair
-          file: abis/pair.json
+          file: ./abis/pair.json
+        - name: Factory
+          file: ./abis/factory.json
       eventHandlers:
         - event: Mint(indexed address,uint256,uint256)
-          handler: onMint
+          handler: handleMint
         - event: Burn(indexed address,uint256,uint256,indexed address)
-          handler: onBurn
+          handler: handleBurn
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
-          handler: onSwap
+          handler: handleSwap
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: onTransfer
+          handler: handleTransfer
         - event: Sync(uint112,uint112)
-          handler: onSync
+          handler: handleSync
+  - kind: ethereum/contract
+    name: Distribution
+    network: fantom
+    source:
+      abi: StakingRewardsDistribution
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/staking-rewards.ts
+      entities:
+        - Deposit
+        - Withdrawal
+        - Claim
+        - Recovery
+      abis:
+        - name: StakingRewardsDistribution
+          file: ./abis/staking-rewards-distribution.json
+      eventHandlers:
+        - event: Initialized(address[],address,uint256[],uint64,uint64,bool,uint256)
+          handler: handleDistributionInitialization
+        - event: Canceled()
+          handler: handleCancelation
+        - event: Staked(indexed address,uint256)
+          handler: handleDeposit
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawal
+        - event: Claimed(indexed address,uint256[])
+          handler: handleClaim
+        - event: Recovered(uint256[])
+          handler: handleRecovery
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransfer

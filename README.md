@@ -60,8 +60,57 @@ This query fetches aggredated data from all soulswap pairs and tokens, to give a
 
 ## Output
 ```
-Deploy key set for https://api.thegraph.com/deploy/
-Unis-MBP:soulswap-subgraph unico$ graph deploy --product hosted-service soulswapfinance/exchange-fantom
+yarn codegen
+yarn run v1.22.10
+$ graph codegen subgraph.yaml
+  Skip migration: Bump mapping apiVersion from 0.0.1 to 0.0.2
+  Skip migration: Bump mapping apiVersion from 0.0.2 to 0.0.3
+  Skip migration: Bump mapping apiVersion from 0.0.3 to 0.0.4
+  Skip migration: Bump mapping specVersion from 0.0.1 to 0.0.2
+✔ Apply migrations
+✔ Load subgraph from subgraph.yaml
+  Load contract ABI from abis/factory.json
+  Load contract ABI from abis/ERC20.json
+  Load contract ABI from abis/ERC20SymbolBytes.json
+  Load contract ABI from abis/ERC20NameBytes.json
+  Load contract ABI from abis/staking-rewards-factory.json
+✔ Load contract ABIs
+  Generate types for contract ABI: Factory (abis/factory.json)
+  Write types to generated/Factory/Factory.ts
+  Generate types for contract ABI: ERC20 (abis/ERC20.json)
+  Write types to generated/Factory/ERC20.ts
+  Generate types for contract ABI: ERC20SymbolBytes (abis/ERC20SymbolBytes.json)
+  Write types to generated/Factory/ERC20SymbolBytes.ts
+  Generate types for contract ABI: ERC20NameBytes (abis/ERC20NameBytes.json)
+  Write types to generated/Factory/ERC20NameBytes.ts
+  Generate types for contract ABI: StakingRewardsFactory (abis/staking-rewards-factory.json)
+  Write types to generated/StakingRewardsFactory/StakingRewardsFactory.ts
+✔ Generate types for contract ABIs
+  Generate types for data source template Pair
+  Generate types for data source template Distribution
+  Write types for templates to generated/templates.ts
+✔ Generate types for data source templates
+  Load data source template ABI from abis/pair.json
+  Load data source template ABI from abis/factory.json
+  Load data source template ABI from abis/staking-rewards-distribution.json
+✔ Load data source template ABIs
+  Generate types for data source template ABI: Pair > Pair (abis/pair.json)
+  Write types to generated/templates/Pair/Pair.ts
+  Generate types for data source template ABI: Pair > Factory (abis/factory.json)
+  Write types to generated/templates/Pair/Factory.ts
+  Generate types for data source template ABI: Distribution > StakingRewardsDistribution (abis/staking-rewards-distribution.json)
+  Write types to generated/templates/Distribution/StakingRewardsDistribution.ts
+✔ Generate types for data source template ABIs
+✔ Load GraphQL schema from schema.graphql
+  Write types to generated/schema.ts
+✔ Generate types for GraphQL schema
+
+Types generated successfully
+
+✨  Done in 2.83s.
+yarn build
+yarn run v1.22.10
+$ graph build subgraph.yaml
   Skip migration: Bump mapping apiVersion from 0.0.1 to 0.0.2
   Skip migration: Bump mapping apiVersion from 0.0.2 to 0.0.3
   Skip migration: Bump mapping apiVersion from 0.0.3 to 0.0.4
@@ -69,44 +118,86 @@ Unis-MBP:soulswap-subgraph unico$ graph deploy --product hosted-service soulswap
 ✔ Apply migrations
 ✔ Load subgraph from subgraph.yaml
   Compile data source: Factory => build/Factory/Factory.wasm
+  Compile data source: StakingRewardsFactory => build/StakingRewardsFactory/StakingRewardsFactory.wasm
   Compile data source template: Pair => build/templates/Pair/Pair.wasm
+  Compile data source template: Distribution => build/StakingRewardsFactory/StakingRewardsFactory.wasm (already compiled)
 ✔ Compile subgraph
   Copy schema file build/schema.graphql
   Write subgraph file build/Factory/abis/factory.json
   Write subgraph file build/Factory/abis/ERC20.json
   Write subgraph file build/Factory/abis/ERC20SymbolBytes.json
   Write subgraph file build/Factory/abis/ERC20NameBytes.json
+  Write subgraph file build/StakingRewardsFactory/abis/staking-rewards-factory.json
   Write subgraph file build/Pair/abis/pair.json
   Write subgraph file build/Pair/abis/factory.json
+  Write subgraph file build/Distribution/abis/staking-rewards-distribution.json
+  Write subgraph manifest build/subgraph.yaml
+✔ Write compiled subgraph to build/
+
+Build completed: /Users/unico/Documents/GitHub/soulswap/soulswap-subgraph/build/subgraph.yaml
+
+✨  Done in 4.52s.
+yarn deploy soulswapfinance/fantom-exchange
+yarn run v1.22.10
+$ graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/fantom-exchange subgraph.yaml soulswapfinance/fantom-exchange
+  Skip migration: Bump mapping apiVersion from 0.0.1 to 0.0.2
+  Skip migration: Bump mapping apiVersion from 0.0.2 to 0.0.3
+  Skip migration: Bump mapping apiVersion from 0.0.3 to 0.0.4
+  Skip migration: Bump mapping specVersion from 0.0.1 to 0.0.2
+✔ Apply migrations
+✔ Load subgraph from subgraph.yaml
+  Compile data source: Factory => build/Factory/Factory.wasm
+  Compile data source: StakingRewardsFactory => build/StakingRewardsFactory/StakingRewardsFactory.wasm
+  Compile data source template: Pair => build/templates/Pair/Pair.wasm
+  Compile data source template: Distribution => build/StakingRewardsFactory/StakingRewardsFactory.wasm (already compiled)
+✔ Compile subgraph
+  Copy schema file build/schema.graphql
+  Write subgraph file build/Factory/abis/factory.json
+  Write subgraph file build/Factory/abis/ERC20.json
+  Write subgraph file build/Factory/abis/ERC20SymbolBytes.json
+  Write subgraph file build/Factory/abis/ERC20NameBytes.json
+  Write subgraph file build/StakingRewardsFactory/abis/staking-rewards-factory.json
+  Write subgraph file build/Pair/abis/pair.json
+  Write subgraph file build/Pair/abis/factory.json
+  Write subgraph file build/Distribution/abis/staking-rewards-distribution.json
   Write subgraph manifest build/subgraph.yaml
 ✔ Write compiled subgraph to build/
   Add file to IPFS build/schema.graphql
-                .. QmaQdcHnNgWwEQo3sEChEoQT1mUyDyxvp56vLNRtXPM5TE
+                .. QmbrMqtgnwxNCCRuuJrjx73L1anFKh4V4w1XoSoCBzoP8W
   Add file to IPFS build/Factory/abis/factory.json
-                .. QmXj1p6rKNSYF78nHcuAFfBnSyyHgxF6d2itS2S18gwiaA
+                .. QmeFnsAz1cHPYSp8F3n5JxZr463X2tc3pdoztFxv2eTV4C
   Add file to IPFS build/Factory/abis/ERC20.json
                 .. QmXuTbDkNrN27VydxbS2huvKRk62PMgUTdPDWkxcr2w7j2
   Add file to IPFS build/Factory/abis/ERC20SymbolBytes.json
                 .. QmbHnhUFZa6qqqRyubUYhXntox1TCBxqryaBM1iNGqVJzT
   Add file to IPFS build/Factory/abis/ERC20NameBytes.json
                 .. QmQCP6Pdp1MqpwRv2qoPHuUTwZGy7Q3eDHg4w5kzwE9mBj
+  Add file to IPFS build/StakingRewardsFactory/abis/staking-rewards-factory.json
+                .. QmSNix2i5kYVQYPjS4BhDJadEjfpzNwAX5a6AfhSvWSPWn
   Add file to IPFS build/Factory/Factory.wasm
-                .. QmQsrWP8oJQq4RMg5Ckc8sDoUoz62Mnf1p6vPq2etq8b4X
+                .. QmRR4j8EnRbB6RYewyTRM4ygk4HcURGtmiCV2QcBTwCnr8
+  Add file to IPFS build/StakingRewardsFactory/StakingRewardsFactory.wasm
+                .. QmQpx5jnbFFufwBT4JEngeRDBo62vdbfNmnVSk32x8ft7g
   Add file to IPFS build/Pair/abis/pair.json
                 .. QmbPLMADBP8L6LBVP3ZBQ8RgG7ghamD8DvbdUxHAjZrLgm
   Add file to IPFS build/Pair/abis/factory.json
-                .. QmXj1p6rKNSYF78nHcuAFfBnSyyHgxF6d2itS2S18gwiaA (already uploaded)
+                .. QmeFnsAz1cHPYSp8F3n5JxZr463X2tc3pdoztFxv2eTV4C (already uploaded)
   Add file to IPFS build/templates/Pair/Pair.wasm
-                .. QmT5PxDTBaXGkPsXgo3WctHX45b5atRpqUrnpXfFKBvCNB
+                .. QmTkXRYKQaMy7oDao9qZLAFQ7Stkje13FqdsNDy9snP2UU
+  Add file to IPFS build/Distribution/abis/staking-rewards-distribution.json
+                .. QmY2V85fudar6uvbacFV5WuioVN3QUXQEYEyeW8LbsvpuE
+  Add file to IPFS build/StakingRewardsFactory/StakingRewardsFactory.wasm
+                .. QmQpx5jnbFFufwBT4JEngeRDBo62vdbfNmnVSk32x8ft7g (already uploaded)
 ✔ Upload subgraph to IPFS
 
-Build completed: QmY2vKEAXZz17JRDgg26vrXGBvGepzQfkXt26CyxLVgqcs
+Build completed: QmSXAa8mPZb2QsnMw1NMZWDpDo94ZVo442vF8YFDP16HBL
 
-Deployed to https://thegraph.com/explorer/subgraph/soulswapfinance/exchange-fantom
+Deployed to https://thegraph.com/explorer/subgraph/soulswapfinance/fantom-exchange
 
 Subgraph endpoints:
-Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/exchange-fantom
-Subscriptions (WS): wss://api.thegraph.com/subgraphs/name/soulswapfinance/exchange-fantom
+Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/fantom-exchange
+Subscriptions (WS): wss://api.thegraph.com/subgraphs/name/soulswapfinance/fantom-exchange
+
 
 ```
 
