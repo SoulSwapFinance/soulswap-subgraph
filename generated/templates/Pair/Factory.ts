@@ -10,6 +10,28 @@ import {
   BigInt
 } from "@graphprotocol/graph-ts";
 
+export class FeeToSetter extends ethereum.Event {
+  get params(): FeeToSetter__Params {
+    return new FeeToSetter__Params(this);
+  }
+}
+
+export class FeeToSetter__Params {
+  _event: FeeToSetter;
+
+  constructor(event: FeeToSetter) {
+    this._event = event;
+  }
+
+  get user(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get feeToSetter(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+}
+
 export class PairCreated extends ethereum.Event {
   get params(): PairCreated__Params {
     return new PairCreated__Params(this);
@@ -40,9 +62,76 @@ export class PairCreated__Params {
   }
 }
 
+export class SetFeeTo extends ethereum.Event {
+  get params(): SetFeeTo__Params {
+    return new SetFeeTo__Params(this);
+  }
+}
+
+export class SetFeeTo__Params {
+  _event: SetFeeTo;
+
+  constructor(event: SetFeeTo) {
+    this._event = event;
+  }
+
+  get user(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get feeTo(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+}
+
+export class SetMigrator extends ethereum.Event {
+  get params(): SetMigrator__Params {
+    return new SetMigrator__Params(this);
+  }
+}
+
+export class SetMigrator__Params {
+  _event: SetMigrator;
+
+  constructor(event: SetMigrator) {
+    this._event = event;
+  }
+
+  get user(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get migrator(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+}
+
 export class Factory extends ethereum.SmartContract {
   static bind(address: Address): Factory {
     return new Factory("Factory", address);
+  }
+
+  INIT_CODE_PAIR_HASH(): Bytes {
+    let result = super.call(
+      "INIT_CODE_PAIR_HASH",
+      "INIT_CODE_PAIR_HASH():(bytes32)",
+      []
+    );
+
+    return result[0].toBytes();
+  }
+
+  try_INIT_CODE_PAIR_HASH(): ethereum.CallResult<Bytes> {
+    let result = super.tryCall(
+      "INIT_CODE_PAIR_HASH",
+      "INIT_CODE_PAIR_HASH():(bytes32)",
+      []
+    );
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBytes());
   }
 
   allPairs(param0: BigInt): Address {
@@ -62,21 +151,6 @@ export class Factory extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  totalPairs(): BigInt {
-    let result = super.call("totalPairs", "totalPairs():(uint256)", []);
-
-    return result[0].toBigInt();
-  }
-
-  try_totalPairs(): ethereum.CallResult<BigInt> {
-    let result = super.tryCall("totalPairs", "totalPairs():(uint256)", []);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   createPair(tokenA: Address, tokenB: Address): Address {
@@ -156,35 +230,35 @@ export class Factory extends ethereum.SmartContract {
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
-}
 
-export class ConstructorCall extends ethereum.Call {
-  get inputs(): ConstructorCall__Inputs {
-    return new ConstructorCall__Inputs(this);
+  migrator(): Address {
+    let result = super.call("migrator", "migrator():(address)", []);
+
+    return result[0].toAddress();
   }
 
-  get outputs(): ConstructorCall__Outputs {
-    return new ConstructorCall__Outputs(this);
-  }
-}
-
-export class ConstructorCall__Inputs {
-  _call: ConstructorCall;
-
-  constructor(call: ConstructorCall) {
-    this._call = call;
+  try_migrator(): ethereum.CallResult<Address> {
+    let result = super.tryCall("migrator", "migrator():(address)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
-  get _feeToSetter(): Address {
-    return this._call.inputValues[0].value.toAddress();
+  totalPairs(): BigInt {
+    let result = super.call("totalPairs", "totalPairs():(uint256)", []);
+
+    return result[0].toBigInt();
   }
-}
 
-export class ConstructorCall__Outputs {
-  _call: ConstructorCall;
-
-  constructor(call: ConstructorCall) {
-    this._call = call;
+  try_totalPairs(): ethereum.CallResult<BigInt> {
+    let result = super.tryCall("totalPairs", "totalPairs():(uint256)", []);
+    if (result.reverted) {
+      return new ethereum.CallResult();
+    }
+    let value = result.value;
+    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 }
 
@@ -282,6 +356,36 @@ export class SetFeeToSetterCall__Outputs {
   _call: SetFeeToSetterCall;
 
   constructor(call: SetFeeToSetterCall) {
+    this._call = call;
+  }
+}
+
+export class SetMigratorCall extends ethereum.Call {
+  get inputs(): SetMigratorCall__Inputs {
+    return new SetMigratorCall__Inputs(this);
+  }
+
+  get outputs(): SetMigratorCall__Outputs {
+    return new SetMigratorCall__Outputs(this);
+  }
+}
+
+export class SetMigratorCall__Inputs {
+  _call: SetMigratorCall;
+
+  constructor(call: SetMigratorCall) {
+    this._call = call;
+  }
+
+  get _migrator(): Address {
+    return this._call.inputValues[0].value.toAddress();
+  }
+}
+
+export class SetMigratorCall__Outputs {
+  _call: SetMigratorCall;
+
+  constructor(call: SetMigratorCall) {
     this._call = call;
   }
 }

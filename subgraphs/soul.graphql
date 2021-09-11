@@ -1,0 +1,7 @@
+# SoulPower
+type SoulPower @entity {
+  id: ID!
+
+  "TotalBurned"
+  totalBurned: BigInt!
+}

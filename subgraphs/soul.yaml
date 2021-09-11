@@ -1,0 +1,26 @@
+specVersion: 0.0.2
+description: SoulPower is a decentralized token for the SoulSwap AMM on Fantom Opera.
+repository: https://github.com/SoulSwapFinance
+schema:
+  file: ./soul.graphql
+dataSources:
+- kind: ethereum/contract
+  name: SoulPower
+  network: fantom
+  source:
+    address: "0xe2fb177009ff39f52c0134e8007fa0e4baacbd07"
+    abi: SoulPower
+    startBlock: 13940869
+  mapping:
+    kind: ethereum/events
+    apiVersion: 0.0.1
+    language: wasm/assemblyscript
+    entities:
+    - SoulPower
+    abis:
+    - name: ERC20
+      file: ../abis/ERC20.json
+    eventHandlers:
+    - event: Transfer(indexed address,indexed address,uint256)
+      handler: handleTransfer
+    file: ../src/token/soul.ts

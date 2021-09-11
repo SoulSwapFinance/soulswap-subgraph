@@ -12,11 +12,12 @@
         "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/soulswap",
         "remove-local": "graph remove --node http://localhost:8020/ /soulswapfinance/soulswap",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/soulswap",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/fantom-exchange subgraph.yaml",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/fantom subgraph.yaml",
         "deploy-studio": "graph deploy --studio soulswap---fantom-exchange",
         "prepare": "mustache ../../config/fantom.json template.yaml > subgraph.yaml"
     },
     "dependencies": {
+        "@graphprotocol/graph-cli": "^0.21.0",
         "@graphprotocol/graph-ts": "^0.20.0"
     }
 }
