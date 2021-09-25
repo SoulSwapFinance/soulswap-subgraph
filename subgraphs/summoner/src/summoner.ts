@@ -1,7 +1,6 @@
 import {
-  AddCall,
+  AddPoolCall,
   Deposit,
-  DevCall,
   MassUpdatePoolsCall,
   SoulSummoner as SoulSummonerContract,
   MigrateCall,
@@ -35,6 +34,7 @@ function getSoulSummoner(block: ethereum.Block): SoulSummoner {
     soulSummoner = new SoulSummoner(SUMMONER_ADDRESS.toHex())
     soulSummoner.bonusMultiplier = contract.bonusMultiplier()
     soulSummoner.migrator = contract.migrator()
+    soulSummoner.supreme = contract.supreme()
 
     // poolInfo ...
     soulSummoner.startTime = contract.startTime()
@@ -109,15 +109,15 @@ export function getPool(id: BigInt, block: ethereum.Block): Pool {
   return pool as Pool
 }
 
-function getHistory(owner: string, block: ethereum.Block): History {
+function getHistory(supreme: string, block: ethereum.Block): History {
   const day = block.timestamp.div(BIG_INT_ONE_DAY_SECONDS)
-  const id = owner.concat(day.toString())
+  const id = supreme.concat(day.toString())
 
   let history = History.load(id)
 
   if (history === null) {
     history = new History(id)
-    history.owner = owner
+    history.owner = supreme
     history.slpBalance = BIG_DECIMAL_ZERO
     history.slpAge = BIG_DECIMAL_ZERO
     history.slpAgeRemoved = BIG_DECIMAL_ZERO
@@ -180,7 +180,7 @@ export function getUser(pid: BigInt, address: Address, block: ethereum.Block): U
   return user as User
 }
 
-export function add(event: AddCall): void {
+export function addPool(event: AddPoolCall): void {
   const soulSummoner = getSoulSummoner(event.block)
 
   log.info('Add pool #{}', [soulSummoner.poolCount.toString()])
@@ -201,21 +201,21 @@ export function add(event: AddCall): void {
 // Calls
 export function set(call: SetCall): void {
   log.info('Set pool id: {} allocPoint: {} withUpdate: {}', [
-    call.inputs._pid.toString(),
-    call.inputs._allocPoint.toString(),
-    call.inputs._withUpdate ? 'true' : 'false',
+    call.inputs.pid.toString(),
+    call.inputs.allocPoint.toString(),
+    call.inputs.withUpdate ? 'true' : 'false',
   ])
 
-  const pool = getPool(call.inputs._pid, call.block)
+  const pool = getPool(call.inputs.pid, call.block)
 
   const soulSummoner = getSoulSummoner(call.block)
 
   // Update soulsummoner
-  soulSummoner.totalAllocPoint = soulSummoner.totalAllocPoint.plus(call.inputs._allocPoint.minus(pool.allocPoint))
+  soulSummoner.totalAllocPoint = soulSummoner.totalAllocPoint.plus(call.inputs.allocPoint.minus(pool.allocPoint))
   soulSummoner.save()
 
   // Update pool
-  pool.allocPoint = call.inputs._allocPoint
+  pool.allocPoint = call.inputs.allocPoint
   pool.save()
 }
 
@@ -230,9 +230,9 @@ export function setMigrator(call: SetMigratorCall): void {
 export function migrate(call: MigrateCall): void {
   const soulSummonerContract = SoulSummonerContract.bind(SUMMONER_ADDRESS)
 
-  const pool = getPool(call.inputs._pid, call.block)
+  const pool = getPool(call.inputs.pid, call.block)
 
-  const poolInfo = soulSummonerContract.poolInfo(call.inputs._pid)
+  const poolInfo = soulSummonerContract.poolInfo(call.inputs.pid)
 
   const pair = poolInfo.value0
 
@@ -252,25 +252,25 @@ export function massUpdatePools(call: MassUpdatePoolsCall): void {
 }
 
 export function updatePool(call: UpdatePoolCall): void {
-  log.info('Update pool id {}', [call.inputs._pid.toString()])
+  log.info('Update pool id {}', [call.inputs.pid.toString()])
 
   const soulSummoner = SoulSummonerContract.bind(SUMMONER_ADDRESS)
-  const poolInfo = soulSummoner.poolInfo(call.inputs._pid)
-  const pool = getPool(call.inputs._pid, call.block)
+  const poolInfo = soulSummoner.poolInfo(call.inputs.pid)
+  const pool = getPool(call.inputs.pid, call.block)
   pool.lastRewardTime = poolInfo.value2
   pool.accSoulPerShare = poolInfo.value3
   pool.save()
 }
 
-export function dev(call: DevCall): void {
-  log.info('Dev changed to {}', [call.inputs._devaddr.toHex()])
+// export function dev(call: DevCall): void {
+//   log.info('Dev changed to {}', [call.inputs._devaddr.toHex()])
 
-  const soulSummoner = getSoulSummoner(call.block)
+//   const soulSummoner = getSoulSummoner(call.block)
 
-  soulSummoner.devaddr = call.inputs._devaddr
+//   soulSummoner.supreme = call.inputs.supreme
 
-  soulSummoner.save()
-}
+//   soulSummoner.save()
+// }
 
 // Events
 export function deposit(event: Deposit): void {
@@ -322,7 +322,7 @@ export function deposit(event: Deposit): void {
   }
 
   // Calculate SOUL being paid out
-  if (event.block.number.gt(SUMMONER_START_TIME) && user.amount.gt(BIG_INT_ZERO)) {
+  if (event.block.timestamp.gt(SUMMONER_START_TIME) && user.amount.gt(BIG_INT_ZERO)) {
     const pending = user.amount
       .toBigDecimal()
       .times(pool.accSoulPerShare.toBigDecimal())

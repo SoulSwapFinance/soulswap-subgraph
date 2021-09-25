@@ -12,6 +12,11 @@ type SoulSummoner @entity {
   # Migrator
   migrator: Bytes!
 
+
+  # Start block
+  startBlock: BigInt!
+
+
   # Start Time
   startTime: BigInt!
 
@@ -86,12 +91,18 @@ type Pool @entity {
   # Index of pool in poolInfo on SoulSummoner contract
   id: ID!
 
+  # Owner
+  owner: SoulSummoner!
+
   # Pair Liquidity Token Address
   pair: Bytes!
 
   # Allocation point
   allocPoint: BigInt!
 
+	# Last reward time
+  lastRewardTime: BigInt!
+  
   # Accumulated soul per share
   accSoulPerShare: BigInt!
 

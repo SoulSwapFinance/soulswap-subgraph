@@ -22,7 +22,7 @@ export const BIG_INT_ZERO = BigInt.fromI32(0);
 export const SUMMONER_START_BLOCK = BigInt.fromI32(17337870); // 23 SEP
 export const SUMMONER_START_TIME = BigInt.fromI32(1632170016); // 23 SEP
 
-export const ACC_SOUL_PRECISION = BigInt.from(1000000000000);
+export const ACC_SOUL_PRECISION = BigInt.fromString("1000000000000");
 
 export const PAIR_ADD_COLLATERAL = "addCollateral";
 export const PAIR_REMOVE_COLLATERAL = "removeCollateral";
