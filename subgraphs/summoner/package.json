@@ -1,0 +1,16 @@
+{
+    "name": "summoner",
+    "license": "MIT",
+    "version": "1.0.0",
+    "author": "SoulSwap",
+    "scripts": {
+        "codegen": "graph codegen subgraph.yaml",
+        "build": "graph build subgraph.yaml",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswap/soul-summoner subgraph.yaml",
+        "deploy-studio": "graph deploy --studio soul---summoner",
+        "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/soulswap",
+        "remove-local": "graph remove --node http://localhost:8020/ /soulswapfinance/soulswap",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/soulswap",
+        "prepare:fantom": "mustache config/fantom.json template.yaml > subgraph.yaml"
+    }
+}
