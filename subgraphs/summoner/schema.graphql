@@ -86,17 +86,11 @@ type Pool @entity {
   # Index of pool in poolInfo on SoulSummoner contract
   id: ID!
 
-  # Owner
-  owner: SoulSummoner!
-
   # Pair Liquidity Token Address
   pair: Bytes!
 
   # Allocation point
   allocPoint: BigInt!
-
-  # Last reward block
-  lastRewardBlock: BigInt!
 
   # Accumulated soul per share
   accSoulPerShare: BigInt!
@@ -205,7 +199,7 @@ type User @entity {
   # entitled to a user but is pending to be distributed is:
   # pending reward = (user.amount * pool.accSoulPerShare) - user.rewardDebt
   # Whenever a user deposits or withdraws LP tokens to a pool. Here's what happens:
-  # 1. The pool's `accSoulPerShare` (and `lastRewardBlock`) gets updated.
+  # 1. The pool's `accSoulPerShare` (and `lastRewardTime`) gets updated.
   # 2. User receives the pending reward sent to his/her address.
   # 3. User's `amount` gets updated.
   # 4. User's `rewardDebt` gets updated.
