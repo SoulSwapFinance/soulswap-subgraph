@@ -1,88 +1,58 @@
-# SoulSwap Subgraph
+# forked from Uniswap V2 Subgraph
 
-Aims to deliver analytics & historical data for SoulSwap. Still a work in progress. Feel free to contribute!
 
-The Graph exposes a GraphQL endpoint to query the events and entities within the SoulSwap ecosytem.
+[Uniswap](https://uniswap.org/) is a decentralized protocol for automated token exchange on Ethereum.
 
-Current subgraph locations:
+This subgraph dynamically tracks any pair created by the uniswap factory. It tracks of the current state of Uniswap contracts, and contains derived stats for things like historical data and USD prices.
 
-1. **Exchange**: Includes all SoulSwap Exchange data with Price Data, Volume, Users, etc:
-   + https://thegraph.com/explorer/subgraph/SoulSwapFinance/fantom-exchange (ftm)
+- aggregated data across pairs and tokens,
+- data on individual pairs and tokens,
+- data on transactions
+- data on liquidity providers
+- historical data on Uniswap, pairs or tokens, aggregated by day
 
-2. **Soul Summoner**: Indexes all SoulSummoner staking data: https://thegraph.com/explorer/subgraph/SoulSwapFinance/soul-summoner
+## Running Locally
 
-3. **Soul Reaper**: Indexes the SoulReaper contract, that handles the serving of exchange fees to the SpellBound: https://thegraph.com/explorer/subgraph/SoulSwapFinance/soul-reaper
+Make sure to update package.json settings to point to your own graph account.
 
-4. **Spell Bound**: Indexes the SpellBound, includes data related to the bound: https://thegraph.com/explorer/subgraph/SoulSwapFinance/spell-bound
+## Queries
 
-## To setup and deploy
+Below are a few ways to show how to query the uniswap-subgraph for data. The queries show most of the information that is queryable, but there are many other filtering options that can be used, just check out the [querying api](https://thegraph.com/docs/graphql-api). These queries can be used locally or in The Graph Explorer playground.
 
-For any of the subgraphs: `soulswap` or `bound` as `[subgraph]`
+## Key Entity Overviews
 
-1. Run the `yarn run codegen:[subgraph]` command to prepare the TypeScript sources for the GraphQL (generated/schema) and the ABIs (generated/[ABI]/\*)
-2. [Optional] run the `yarn run build:[subgraph]` command to build the subgraph. Can be used to check compile errors before deploying.
-3. Run `graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>`
-4. Deploy via `yarn run deploy:[subgraph]`.
+#### UniswapFactory
 
-## To query these subgraphs
+Contains data across all of Uniswap V2. This entity tracks important things like total liquidity (in ETH and USD, see below), all time volume, transaction count, number of pairs and more.
 
-Please use our node utility: [soul-data](https://github.com/soulswap/soul-data).
+#### Token
 
-Note: This is in on going development as well.
+Contains data on a specific token. This token specific data is aggregated across all pairs, and is updated whenever there is a transaction involving that token.
+
+#### Pair
+
+Contains data on a specific pair.
+
+#### Transaction
+
+Every transaction on Uniswap is stored. Each transaction contains an array of mints, burns, and swaps that occured within it.
+
+#### Mint, Burn, Swap
+
+These contain specifc information about a transaction. Things like which pair triggered the transaction, amounts, sender, recipient, and more. Each is linked to a parent Transaction entity.
 
 ## Example Queries
 
-We will add to this as development progresses.
+### Querying Aggregated Uniswap Data
 
-### Reaper
+This query fetches aggredated data from all uniswap pairs and tokens, to give a view into how much activity is happening within the whole protocol.
 
 ```graphql
 {
-  reaper(id: "0x6684977bbed67e101bb80fc07fccfba655c0a64f") {
-    id
-    servings(orderBy: timestamp) {
-      id
-      server {
-        id
-      }
-      tx
-      pair
-      token0
-      token1
-      soulServed
-      block
-      timestamp
-    }
-  }
-  servers {
-    id
-    soulServed
-    servings(orderBy: timestamp) {
-      id
-      server {
-        id
-      }
-      tx
-      pair
-      token0
-      token1
-      soul
-      block
-      timestamp
-    }
+  uniswapFactories(first: 1) {
+    pairCount
+    totalVolumeUSD
+    totalLiquidityUSD
   }
 }
 ```
-
-# Community Subgraphs
-
-1) croco-finance fork of this repo with slight modifications - [deployment](https://thegraph.com/explorer/subgraph/benesjan/sushi-swap), [code](https://github.com/croco-finance/sushiswap-subgraph)
-
-2) croco-finance dex-rewards-subgraph which tracks SLPs in MasterChef and all the corresponding rewards individually. (can be used for analysis of user's positions) - [deployment](https://thegraph.com/explorer/subgraph/benesjan/dex-rewards-subgraph), [code](https://github.com/croco-finance/dex-rewards-subgraph)
-
-
-Subgraph endpoints:
-Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/soul-summoner
-
-Subgraph endpoints:
-Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/exchange-fantom
