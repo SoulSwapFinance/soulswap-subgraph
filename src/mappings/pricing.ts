@@ -4,7 +4,7 @@ import { BigDecimal, Address, BigInt, log } from '@graphprotocol/graph-ts/index'
 import { ZERO_BD, factoryContract, ADDRESS_ZERO, ONE_BD } from './helpers'
 
 let WFTM_ADDRESS = '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
-let WFTM_USDC_ADDRESS = '0x160653F02b6597E7Db00BA8cA826cf43D2f39556'
+let WFTM_USDC_ADDRESS = '0x160653f02b6597e7db00ba8ca826cf43d2f39556'
 let USDC = '0x04068da6c83afcfa0e13ba15a6696662335d5b75'
 
 let WHITELIST: string[] = [
