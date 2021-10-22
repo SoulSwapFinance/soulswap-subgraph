@@ -10,12 +10,10 @@
     "codegen": "yarn workspaces run codegen",
     "prepare:mainnet": "yarn workspaces run prepare:mainnet",
     "prepare:fantom": "yarn workspaces run prepare:fantom"
-
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.21.0",
     "@graphprotocol/graph-ts": "^0.20.0",
-    "@soulswap/swap-core": "^0.0.3",
     "@sushiswap/core": "^1.4.2",
     "@sushiswap/prettier-config": "^0.1.0",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
