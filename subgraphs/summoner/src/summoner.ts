@@ -61,6 +61,7 @@ function getSoulSummoner(block: ethereum.Block): SoulSummoner {
 
 export function getPool(id: BigInt, block: ethereum.Block): Pool {
   let pool = Pool.load(id.toString())
+  
   if (pool === null) {
     const soulSummoner = getSoulSummoner(block)
 
