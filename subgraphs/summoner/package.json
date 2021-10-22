@@ -7,7 +7,7 @@
         "codegen": "graph codegen subgraph.yaml",
         "build": "graph build subgraph.yaml",
         "rebuild": "rm -rf build && rm -rf subgraph.yaml && yarn prepare:fantom && yarn codegen && yarn build",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ /soulswapfinance/soul-summoner subgraph.yaml",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/soul-summoner subgraph.yaml",
         "deploy-studio": "graph deploy --studio soul---summoner",
         
         "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/soul-summoner",
