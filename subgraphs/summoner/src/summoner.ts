@@ -61,7 +61,6 @@ function getSoulSummoner(block: ethereum.Block): SoulSummoner {
 
 export function getPool(id: BigInt, block: ethereum.Block): Pool {
   let pool = Pool.load(id.toString())
-
   if (pool === null) {
     const soulSummoner = getSoulSummoner(block)
 
@@ -413,7 +412,6 @@ export function deposit(event: Deposit): void {
 
   soulSummoner.slpDeposited = soulSummoner.slpDeposited.plus(amount)
   soulSummoner.slpBalance = soulSummoner.slpBalance.plus(amount)
-
   soulSummoner.updatedAt = event.block.timestamp
   soulSummoner.save()
 
@@ -488,12 +486,14 @@ export function withdraw(event: Withdraw): void {
       //   getSoulPrice(event.block).toString(),
       // ])
       const soulHarvestedUSD = pending.times(getSoulPrice(event.block))
+      if(soulHarvestedUSD !== null) {
       user.soulHarvested = user.soulHarvested.plus(pending)
       user.soulHarvestedUSD = user.soulHarvestedUSD.plus(soulHarvestedUSD)
       pool.soulHarvested = pool.soulHarvested.plus(pending)
       pool.soulHarvestedUSD = pool.soulHarvestedUSD.plus(soulHarvestedUSD)
       poolHistory.soulHarvested = pool.soulHarvested
       poolHistory.soulHarvestedUSD = pool.soulHarvestedUSD
+      }
     }
   }
 
