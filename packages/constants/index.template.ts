@@ -32,7 +32,7 @@ export const FACTORY_ADDRESS = Address.fromString(
 )
 
 export const SUMMONER_ADDRESS = Address.fromString(
-  '{{ summoner_address }}{{^summoner_address}}0x0000000000000000000000000000000000000000{{/masterchef_address}}'
+  '{{ summoner_address }}{{^summoner_address}}0x0000000000000000000000000000000000000000{{/summoner_address}}'
 )
 
 export const SPELL_BOUND_ADDRESS = Address.fromString(

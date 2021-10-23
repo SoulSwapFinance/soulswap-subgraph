@@ -12,11 +12,6 @@ type SoulSummoner @entity {
   # Migrator
   migrator: Bytes!
 
-
-  # Start block
-  startBlock: BigInt!
-
-
   # Start Time
   startTime: BigInt!
 

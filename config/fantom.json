@@ -1,14 +1,14 @@
 {
   "network": "fantom",
-  "factory_address": "0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF",
-  "soul_address": "0xe2fb177009FF39F52C0134E8007FA0e4BaAcBd07",
+  "factory_address": "0x1120e150da9def6fe930f4feded18ef57c0ca7ef",
+  "soul_address": "0xe2fb177009ff39f52c0134e8007fa0e4baacbd07",
 
-  "soul_weth_pair": "0xa2527Af9DABf3E3B4979d7E0493b5e2C6e63dC57",
-  "usdc_weth_pair": "0x160653F02b6597E7Db00BA8cA826cf43D2f39556",
-  "dai_weth_pair": "0xF3d6E8Ecece8647B456d57375Ce0B51B8F0cD40b",
-  "usdt_weth_pair": "0xdC24814AD654986928F8E4aec48D37fa30bBC5BB",
+  "soul_weth_pair": "0xa2527af9dabf3e3b4979d7e0493b5e2c6e63dc57",
+  "usdc_weth_pair": "0x160653f02b6597e7db00ba8ca826cf43d2f39556",
+  "dai_weth_pair": "0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b",
+  "usdt_weth_pair": "0xdc24814ad654986928f8e4aec48d37fa30bbc5bb",
 
-  "weth_address": "0x74b23882a30290451a17c44f4f05243b6b58c76d",
+  "weth_address": "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
   "native_address": "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
   "dai_address": "0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e",
   "usdt_address": "0x049d68029688eabf473097a2fc38ef61633a3c7a",
@@ -16,7 +16,7 @@
   "minimum_liquidity_threshold_eth": "100",
   "minimum_usd_threshold_new_pairs": "100",
   "factory": {
-    "address": "0x1120e150dA9def6Fe930f4fEDeD18ef57c0CA7eF",
+    "address": "0x1120e150da9def6fe930f4feded18ef57c0ca7ef",
     "startBlock": "16108819"
   },
   "whitelist": [

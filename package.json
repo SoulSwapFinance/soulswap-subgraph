@@ -10,7 +10,6 @@
     "codegen": "yarn workspaces run codegen",
     "prepare:mainnet": "yarn workspaces run prepare:mainnet",
     "prepare:fantom": "yarn workspaces run prepare:fantom"
-
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.21.0",

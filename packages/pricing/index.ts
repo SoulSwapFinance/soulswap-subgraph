@@ -5,6 +5,7 @@ import {
   BIG_DECIMAL_ONE,
   BIG_DECIMAL_ZERO,
   FACTORY_ADDRESS,
+  FACTORY_START_BLOCK,
   USDT_ADDRESS,
   SOUL_ADDRESS,
   SOULSWAP_WETH_USDT_PAIR_ADDRESS,
@@ -21,7 +22,6 @@ import {
 
 import { Factory as FactoryContract } from "exchange/generated/Factory/Factory";
 import { Pair as PairContract } from "exchange/generated/Factory/Pair";
-import { FACTORY_START_BLOCK } from "const/index.template";
 
 export function getUSDRate(token: Address, block: ethereum.Block): BigDecimal {
   const usdt = BIG_DECIMAL_ONE;
@@ -104,11 +104,16 @@ export function getSoulPrice(block: ethereum.Block): BigDecimal {
         ? SOUL_USDT_PAIR_ADDRESS
         : SOUL_USDT_PAIR_ADDRESS
     );
+    const reservesResult = pair.try_getReserves()
+    if(!reservesResult.reverted) {
     const reserves = pair.getReserves();
     return reserves.value1
       .toBigDecimal()
       .times(BIG_DECIMAL_1E18)
       .div(reserves.value0.toBigDecimal())
       .div(BIG_DECIMAL_1E6);
+    } else {
+      return null;
+    }
   }
 }
