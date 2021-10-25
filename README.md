@@ -1,132 +1,88 @@
-# SoulSwap Exchange Subgraph
+# SoulSwap Subgraph
 
-Subgraph designed to enable users to view transactional data from the blockchain.
+Aims to deliver analytics & historical data for SoulSwap. Still a work in progress. Feel free to contribute!
 
-[SoulSwap](https://soulswap.finance/) is a decentralized protocol for automated token exchange on Fantom.
+The Graph exposes a GraphQL endpoint to query the events and entities within the SoulSwap ecosytem.
 
-This subgraph dynamically tracks any pair created by the SoulSwap factory. It tracks of the current state of SoulSwap contracts, and contains derived stats for things like historical data and USD prices.
+Current subgraph locations:
 
-- aggregated data across pairs and tokens,
-- data on individual pairs and tokens,
-- data on transactions
-- data on liquidity providers
-- historical data on SoulSwap, pairs or tokens, aggregated by day
+1. **Exchange**: Includes all SoulSwap Exchange data with Price Data, Volume, Users, etc:
+   + https://thegraph.com/explorer/subgraph/SoulSwapFinance/fantom-exchange (ftm)
 
-## Running Locally
+2. **Soul Summoner**: Indexes all SoulSummoner staking data: https://thegraph.com/explorer/subgraph/SoulSwapFinance/soul-summoner
 
-Make sure to update package.json settings to point to your own graph account.
+3. **Soul Reaper**: Indexes the SoulReaper contract, that handles the serving of exchange fees to the SpellBound: https://thegraph.com/explorer/subgraph/SoulSwapFinance/soul-reaper
 
-## Queries
+4. **Spell Bound**: Indexes the SpellBound, includes data related to the bound: https://thegraph.com/explorer/subgraph/SoulSwapFinance/spell-bound
 
-Below are a few ways to show how to query the soulswap-subgraph for data. The queries show most of the information that is queryable, but there are many other filtering options that can be used, just check out the [querying api](https://thegraph.com/docs/graphql-api). These queries can be used locally or in The Graph Explorer playground.
+## To setup and deploy
 
-## Key Entity Overviews
+For any of the subgraphs: `soulswap` or `bound` as `[subgraph]`
 
-#### SoulSwapFactory
+1. Run the `yarn run codegen:[subgraph]` command to prepare the TypeScript sources for the GraphQL (generated/schema) and the ABIs (generated/[ABI]/\*)
+2. [Optional] run the `yarn run build:[subgraph]` command to build the subgraph. Can be used to check compile errors before deploying.
+3. Run `graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>`
+4. Deploy via `yarn run deploy:[subgraph]`.
 
-Contains data across all of SoulSwap. This entity tracks important things like total liquidity (in ETH and USD, see below), all time volume, transaction count, number of pairs and more.
+## To query these subgraphs
 
-#### Token
+Please use our node utility: [soul-data](https://github.com/soulswap/soul-data).
 
-Contains data on a specific token. This token specific data is aggregated across all pairs, and is updated whenever there is a transaction involving that token.
-
-#### Pair
-
-Contains data on a specific pair.
-
-#### Transaction
-
-Every transaction on SoulSwap is stored. Each transaction contains an array of mints, burns, and swaps that occured within it.
-
-#### Mint, Burn, Swap
-
-These contain specifc information about a transaction. Things like which pair triggered the transaction, amounts, sender, recipient, and more. Each is linked to a parent Transaction entity.
+Note: This is in on going development as well.
 
 ## Example Queries
 
-### Querying Aggregated SoulSwap Data
+We will add to this as development progresses.
 
-This query fetches aggredated data from all soulswap pairs and tokens, to give a view into how much activity is happening within the whole protocol.
+### Reaper
 
 ```graphql
 {
-  soulSwapFactories(first: 1) {
-    totalPairs
-    totalVolumeUSD
-    totalLiquidityUSD
+  reaper(id: "0x6684977bbed67e101bb80fc07fccfba655c0a64f") {
+    id
+    servings(orderBy: timestamp) {
+      id
+      server {
+        id
+      }
+      tx
+      pair
+      token0
+      token1
+      soulServed
+      block
+      timestamp
+    }
+  }
+  servers {
+    id
+    soulServed
+    servings(orderBy: timestamp) {
+      id
+      server {
+        id
+      }
+      tx
+      pair
+      token0
+      token1
+      soul
+      block
+      timestamp
+    }
   }
 }
 ```
 
-## Output
-```
-Deploy key set for https://api.thegraph.com/deploy/
-Unis-MBP:soulswap-subgraph unico$ graph deploy --product hosted-service soulswapfinance/exchange-fantom
-  Skip migration: Bump mapping apiVersion from 0.0.1 to 0.0.2
-  Skip migration: Bump mapping apiVersion from 0.0.2 to 0.0.3
-  Skip migration: Bump mapping apiVersion from 0.0.3 to 0.0.4
-  Skip migration: Bump mapping specVersion from 0.0.1 to 0.0.2
-✔ Apply migrations
-✔ Load subgraph from subgraph.yaml
-  Compile data source: Factory => build/Factory/Factory.wasm
-  Compile data source template: Pair => build/templates/Pair/Pair.wasm
-✔ Compile subgraph
-  Copy schema file build/schema.graphql
-  Write subgraph file build/Factory/abis/factory.json
-  Write subgraph file build/Factory/abis/ERC20.json
-  Write subgraph file build/Factory/abis/ERC20SymbolBytes.json
-  Write subgraph file build/Factory/abis/ERC20NameBytes.json
-  Write subgraph file build/Pair/abis/pair.json
-  Write subgraph file build/Pair/abis/factory.json
-  Write subgraph manifest build/subgraph.yaml
-✔ Write compiled subgraph to build/
-  Add file to IPFS build/schema.graphql
-                .. QmaQdcHnNgWwEQo3sEChEoQT1mUyDyxvp56vLNRtXPM5TE
-  Add file to IPFS build/Factory/abis/factory.json
-                .. QmXj1p6rKNSYF78nHcuAFfBnSyyHgxF6d2itS2S18gwiaA
-  Add file to IPFS build/Factory/abis/ERC20.json
-                .. QmXuTbDkNrN27VydxbS2huvKRk62PMgUTdPDWkxcr2w7j2
-  Add file to IPFS build/Factory/abis/ERC20SymbolBytes.json
-                .. QmbHnhUFZa6qqqRyubUYhXntox1TCBxqryaBM1iNGqVJzT
-  Add file to IPFS build/Factory/abis/ERC20NameBytes.json
-                .. QmQCP6Pdp1MqpwRv2qoPHuUTwZGy7Q3eDHg4w5kzwE9mBj
-  Add file to IPFS build/Factory/Factory.wasm
-                .. QmQsrWP8oJQq4RMg5Ckc8sDoUoz62Mnf1p6vPq2etq8b4X
-  Add file to IPFS build/Pair/abis/pair.json
-                .. QmbPLMADBP8L6LBVP3ZBQ8RgG7ghamD8DvbdUxHAjZrLgm
-  Add file to IPFS build/Pair/abis/factory.json
-                .. QmXj1p6rKNSYF78nHcuAFfBnSyyHgxF6d2itS2S18gwiaA (already uploaded)
-  Add file to IPFS build/templates/Pair/Pair.wasm
-                .. QmT5PxDTBaXGkPsXgo3WctHX45b5atRpqUrnpXfFKBvCNB
-✔ Upload subgraph to IPFS
+# Community Subgraphs
 
-Build completed: QmY2vKEAXZz17JRDgg26vrXGBvGepzQfkXt26CyxLVgqcs
+1) croco-finance fork of this repo with slight modifications - [deployment](https://thegraph.com/explorer/subgraph/benesjan/sushi-swap), [code](https://github.com/croco-finance/sushiswap-subgraph)
 
-Deployed to https://thegraph.com/explorer/subgraph/soulswapfinance/exchange-fantom
+2) croco-finance dex-rewards-subgraph which tracks SLPs in MasterChef and all the corresponding rewards individually. (can be used for analysis of user's positions) - [deployment](https://thegraph.com/explorer/subgraph/benesjan/dex-rewards-subgraph), [code](https://github.com/croco-finance/dex-rewards-subgraph)
+
+
+Subgraph endpoints:
+Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/soul-summoner
 
 Subgraph endpoints:
 Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/exchange-fantom
-Subscriptions (WS): wss://api.thegraph.com/subgraphs/name/soulswapfinance/exchange-fantom
-
-```
-
-## Graph Commands
-
-### **Installation**
-* `npm install -g @graphprotocol/graph-cli`
-<br>
-* `yarn global add @graphprotocol/graph-cli`
-<br>
-### **Initialization**
-* `npm install -gg @graphprotocol/graph/cli`
-<br>
-* `yarn global add @graphprotocol/graphcli`
-<br>
-
-### **Deployment**
-* `graph auth --product hosted-service <ACCESS_TOKEN>
-`
-<br>
-* `graph deploy --product hosted-service <GITHUB_USER>/<SUBGRAPH NAME>`
-
-### Redeployment
