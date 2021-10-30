@@ -3,9 +3,6 @@ type SoulSummoner @entity {
   # Contract address
   id: ID!
 
-  # Bonus multiplier
-  bonusMultiplier: BigInt!
-
   # Supreme address
   supreme: Bytes!
 

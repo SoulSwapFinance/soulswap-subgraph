@@ -35,8 +35,8 @@ export const SUMMONER_ADDRESS = Address.fromString(
   '{{ summoner_address }}{{^summoner_address}}0x0000000000000000000000000000000000000000{{/summoner_address}}'
 )
 
-export const SPELL_BOUND_ADDRESS = Address.fromString(
-  '{{ spell_bound_address }}{{^spell_bound_address}}0x0000000000000000000000000000000000000000{{/spell_bound_address}}'
+export const ENCHANT_ADDRESS = Address.fromString(
+  '{{ enchant_address }}{{^enchant_address}}0x0000000000000000000000000000000000000000{{/spell_bound_address}}'
 )
 
 export const SEANCE_CIRCLE_ADDRESS = Address.fromString(

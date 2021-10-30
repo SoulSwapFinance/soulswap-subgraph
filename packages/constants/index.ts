@@ -36,8 +36,8 @@ export const SUMMONER_ADDRESS = Address.fromString(
   "0xce6ccbb1edad497b4d53d829df491af70065ab5b"
 )
 
-export const SPELL_BOUND_ADDRESS = Address.fromString(
-  "0xf4799d8269b061c43236a6d2ad5415589f984f84"
+export const ENCHANT_ADDRESS = Address.fromString(
+  "0x6a1a8368d607c7a808f7bba4f7aed1d9ebde147a"
 )
 
 export const SEANCE_CIRCLE_ADDRESS = Address.fromString(
