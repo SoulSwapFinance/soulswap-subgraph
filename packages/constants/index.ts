@@ -44,6 +44,10 @@ export const SEANCE_CIRCLE_ADDRESS = Address.fromString(
   "0x124b06c5ce47de7a6e9efda71a946717130079e6"
 )
 
+export const SEANCE_TOKEN_ADDRESS = Address.fromString(
+  "0x124b06c5ce47de7a6e9efda71a946717130079e6"
+)
+
 export const SOUL_REAPER_ADDRESS = Address.fromString(
   "0x0000000000000000000000000000000000000000"
 )
@@ -67,6 +71,25 @@ export const SEANCE_WETH_PAIR_ADDRESS = Address.fromString(
 export const SOUL_DISTRIBUTOR_ADDRESS = Address.fromString(
   "0x0000000000000000000000000000000000000000"
 )
+
+// MiniChef
+export const MINI_CHEF_ADDRESS = Address.fromString(
+  '{{ minichef_address }}{{^minichef_address}}0x0000000000000000000000000000000000000000{{/minichef_address}}'
+)
+
+export const COMPLEX_REWARDER = Address.fromString(
+  '{{ complex_rewarder_address }}{{^complex_rewarder_address}}0x0000000000000000000000000000000000000000{{/complex_rewarder_address}}'
+)
+
+export const CONVEX_REWARDERS: Array<Address> = [
+  Address.fromString('0x9e01aac4b3e8781a85b21d9d9f848e72af77b362'),
+  Address.fromString('0x1fd97b5e5a257b0b9b9a42a96bb8870cbdd1eb79'),
+]
+
+export const ALCX_REWARDER = Address.fromString('0x7519c93fc5073e15d89131fd38118d73a72370f8')
+
+export const LIDO_REWARDER = Address.fromString('0x75ff3dd673ef9fc459a52e1054db5df2a1101212')
+
 
 export const USDC_WETH_PAIR =
   "0x160653f02b6597e7db00ba8ca826cf43d2f39556"

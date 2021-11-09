@@ -32,7 +32,7 @@ function getSoulSummoner(block: ethereum.Block): SoulSummoner {
   if (soulSummoner === null) {
     const contract = SoulSummonerContract.bind(SUMMONER_ADDRESS)
     soulSummoner = new SoulSummoner(SUMMONER_ADDRESS.toHex())
-    soulSummoner.bonusMultiplier = contract.bonusMultiplier()
+    // soulSummoner.bonusMultiplier = contract.bonusMultiplier()
     soulSummoner.migrator = contract.migrator()
     soulSummoner.supreme = contract.supreme()
 
@@ -274,20 +274,20 @@ export function updatePool(call: UpdatePoolCall): void {
 
 // Events
 export function deposit(event: Deposit): void {
-  // if (event.params.amount == BIG_INT_ZERO) {
-  //   log.info('Deposit zero transaction, input {} hash {}', [
-  //     event.transaction.input.toHex(),
-  //     event.transaction.hash.toHex(),
-  //   ])
-  // }
+  if (event.params.amount == BIG_INT_ZERO) {
+    log.info('Deposit zero transaction, input {} hash {}', [
+      event.transaction.input.toHex(),
+      event.transaction.hash.toHex(),
+    ])
+  }
 
   const amount = event.params.amount.divDecimal(BIG_DECIMAL_1E18)
 
-  /*log.info('{} has deposited {} slp tokens to pool #{}', [
+  log.info('{} has deposited {} slp tokens to pool #{}', [
     event.params.user.toHex(),
     event.params.amount.toString(),
     event.params.pid.toString(),
-  ])*/
+  ])
 
   const soulSummonerContract = SoulSummonerContract.bind(SUMMONER_ADDRESS)
 
@@ -366,34 +366,34 @@ export function deposit(event: Deposit): void {
 
       const entryUSD = token0USD.plus(token1USD)
 
-      // log.info(
-      //   'Token {} priceUSD: {} reserve: {} amount: {} / Token {} priceUSD: {} reserve: {} amount: {} - slp amount: {} total supply: {} share: {}',
-      //   [
-      //     token0.symbol(),
-      //     token0PriceUSD.toString(),
-      //     reservesResult.value.value0.toString(),
-      //     token0Amount.toString(),
-      //     token1.symbol(),
-      //     token1PriceUSD.toString(),
-      //     reservesResult.value.value1.toString(),
-      //     token1Amount.toString(),
-      //     amount.toString(),
-      //     totalSupply.toString(),
-      //     share.toString(),
-      //   ]
-      // )
+      log.info(
+        'Token {} priceUSD: {} reserve: {} amount: {} / Token {} priceUSD: {} reserve: {} amount: {} - slp amount: {} total supply: {} share: {}',
+        [
+          // pairContract.token0.symbol(),
+          token0PriceUSD.toString(),
+          reservesResult.value.value0.toString(),
+          token0Amount.toString(),
+          // pairContract.token1.symbol(),
+          token1PriceUSD.toString(),
+          reservesResult.value.value1.toString(),
+          token1Amount.toString(),
+          amount.toString(),
+          totalSupply.toString(),
+          share.toString(),
+        ]
+      )
 
-      // log.info('User {} has deposited {} SLP tokens {} {} (${}) and {} {} (${}) at a combined value of ${}', [
-      //   user.address.toHex(),
-      //   amount.toString(),
-      //   token0Amount.toString(),
-      //   token0.symbol(),
-      //   token0USD.toString(),
-      //   token1Amount.toString(),
-      //   token1.symbol(),
-      //   token1USD.toString(),
-      //   entryUSD.toString(),
-      // ])
+      log.info('User {} has deposited {} SLP tokens {} {} (${}) and {} {} (${}) at a combined value of ${}', [
+        user.address.toHex(),
+        amount.toString(),
+        token0Amount.toString(),
+        // pairContract.token0.symbol(),
+        token0USD.toString(),
+        token1Amount.toString(),
+        // pairContract.token1.symbol(),
+        token1USD.toString(),
+        entryUSD.toString(),
+      ])
 
       user.entryUSD = user.entryUSD.plus(entryUSD)
 

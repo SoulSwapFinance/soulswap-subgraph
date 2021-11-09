@@ -4,7 +4,7 @@ import {
     BIG_DECIMAL_1E6,
     BIG_DECIMAL_ZERO,
     ENCHANT_ADDRESS,
-    SEANCE_CIRCLE_ADDRESS,
+    SEANCE_TOKEN_ADDRESS,
     SEANCE_USDC_PAIR_ADDRESS,
   } from 'const'
   import { Address, BigDecimal, BigInt, dataSource, ethereum, log } from '@graphprotocol/graph-ts'
@@ -12,13 +12,14 @@ import {
   import { Enchantment as EnchantmentContract, Transfer as TransferEvent } from '../generated/Enchantment/Enchantment'
   
   import { Pair as PairContract } from '../generated/Enchantment/Pair'
-  import { Seance as SeanceContract } from '../generated/Enchantment/Seance'
+  import { SeanceToken as SeanceTokenContract } from '../generated/Enchantment/SeanceToken'
   
   // TODO: Get averages of multiple seance stablecoin pairs
   function getSeancePrice(): BigDecimal {
     const pair = PairContract.bind(SEANCE_USDC_PAIR_ADDRESS)
     const reserves = pair.getReserves()
-    return reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value0.toBigDecimal()).div(BIG_DECIMAL_1E6)
+    // return reserves.value1.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value0.toBigDecimal()).div(BIG_DECIMAL_1E6)
+    return reserves.value0.toBigDecimal().times(BIG_DECIMAL_1E18).div(reserves.value1.toBigDecimal()).div(BIG_DECIMAL_1E6) // USDC / SEANCE
   }
   
   function createEnchantment(block: ethereum.Block): Enchantment {
@@ -147,18 +148,18 @@ import {
     const seancePrice = getSeancePrice()
   
     enchantment.totalSupply = enchantmentContract.totalSupply().divDecimal(BIG_DECIMAL_1E18)
-    enchantment.seanceStaked = SeanceContract.bind(SEANCE_CIRCLE_ADDRESS)
+    enchantment.seanceStaked = SeanceTokenContract.bind(SEANCE_TOKEN_ADDRESS)
       .balanceOf(ENCHANT_ADDRESS)
       .divDecimal(BIG_DECIMAL_1E18)
     enchantment.ratio = enchantment.seanceStaked.div(enchantment.totalSupply)
   
     const what = value.times(enchantment.ratio)
   
-    // Minted enchant
+    // Minted ENCHANT
     if (event.params.from == ADDRESS_ZERO) {
       const user = getUser(event.params.to, event.block)
   
-      log.info('{} minted {} enchat in exchange for {} seance - seanceStaked before {} seanceStaked after {}', [
+      log.info('{} minted {} enchant in exchange for {} seance - seanceStaked before {} seanceStaked after {}', [
         event.params.to.toHex(),
         value.toString(),
         what.toString(),
@@ -209,7 +210,7 @@ import {
       history.save()
     }
   
-    // Burned enchant
+    // Burned ENCHANT
     if (event.params.to == ADDRESS_ZERO) {
       log.info('{} burned {} enchant', [event.params.from.toHex(), value.toString()])
   

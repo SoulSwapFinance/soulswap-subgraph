@@ -1,233 +1,64 @@
-# SoulSummoner
-type SoulSummoner @entity {
+type Summoner @entity {
   # Contract address
   id: ID!
 
-  # Supreme address
-  supreme: Bytes!
+  #owner: Bytes!
+  #migrator: Bytes!
 
-  # Migrator
-  migrator: Bytes!
-
-  # Start Time
-  startTime: BigInt!
-
-  # Soul
-  soul: Bytes!
-
-  # Soul per second
-  soulPerSecond: BigInt!
-
-  # Total allocation point
+  #soulPerSecond: BgInt! not needed till fully migrated over
   totalAllocPoint: BigInt!
 
-  # Pools
-  pools: [Pool!]! @derivedFrom(field: "owner")
-
-  # Pool count
+  pools: [Pool!] @derivedFrom(field: "summoner")
   poolCount: BigInt!
 
-  # SLP Balance
-  slpBalance: BigDecimal!
+  #history: [History!]! @derivedFrom(field: "summoner")
 
-  # SLP Age
-  slpAge: BigDecimal!
-
-  # SLP Removed
-  slpAgeRemoved: BigDecimal!
-
-  # SLP Deposited
-  slpDeposited: BigDecimal!
-
-  # SLP Withdrawn
-  slpWithdrawn: BigDecimal!
-
-  # History
-  history: [History!]! @derivedFrom(field: "owner")
-
-  # Upated at
-  updatedAt: BigInt!
-}
-
-type History @entity {
-  # Soul Summoner id concatenated with timestamp
-  id: ID!
-
-  # Owner (SoulSummoner, Pool, or User).
-  owner: SoulSummoner!
-
-  # SLP Balance
-  slpBalance: BigDecimal!
-
-  # SLP Age
-  slpAge: BigDecimal!
-
-  # SLP Removed
-  slpAgeRemoved: BigDecimal!
-
-  # SLP Deposited
-  slpDeposited: BigDecimal!
-
-  # SLP Withdrawn
-  slpWithdrawn: BigDecimal!
-
-  # Timestamp
   timestamp: BigInt!
-
-  # Block
   block: BigInt!
 }
 
-# Pool
 type Pool @entity {
-  # Index of pool in poolInfo on SoulSummoner contract
+  # Index of pool in poolInfo on Summoner contract
   id: ID!
-
-  # Owner
-  owner: SoulSummoner!
-
-  # Pair Liquidity Token Address
+  summoner: Summoner!
   pair: Bytes!
 
-  # Allocation point
-  allocPoint: BigInt!
+  rewarder: Rewarder
 
-	# Last reward time
+  allocPoint: BigInt!
   lastRewardTime: BigInt!
-  
-  # Accumulated soul per share
   accSoulPerShare: BigInt!
 
-  # SLP token balance
-  balance: BigInt!
+  slpBalance: BigInt!
 
-  # Pool users
   users: [User!]! @derivedFrom(field: "pool")
-
-  # User count
   userCount: BigInt!
 
-  # SLP Balance
-  slpBalance: BigDecimal!
-
-  # SLP Age
-  slpAge: BigDecimal!
-
-  # SLP Removed
-  slpAgeRemoved: BigDecimal!
-
-  # SLP Deposited
-  slpDeposited: BigDecimal!
-
-  # SLP Withdrawn
-  slpWithdrawn: BigDecimal!
-
-  # Timestamp
   timestamp: BigInt!
-
-  # Block
   block: BigInt!
-
-  # Updated at
-  updatedAt: BigInt!
-
-  # Entry USD
-  entryUSD: BigDecimal!
-
-  # Exit USD
-  exitUSD: BigDecimal!
-
-  # Soul harvested
-  soulHarvested: BigDecimal!
-
-  # Soul harvested
-  soulHarvestedUSD: BigDecimal!
 }
 
-type PoolHistory @entity {
-  # Pool id concatenated with timestamp
+type Rewarder @entity {
+  # address
   id: ID!
+  rewardToken: Bytes!
+  rewardPerSecond: BigInt!
 
-  # Pool
-  pool: Pool!
-
-  # SLP Balance
-  slpBalance: BigDecimal!
-
-  # SLP Age
-  slpAge: BigDecimal!
-
-  # SLP Removed
-  slpAgeRemoved: BigDecimal!
-
-  # SLP Deposited
-  slpDeposited: BigDecimal!
-
-  # SLP Withdrawn
-  slpWithdrawn: BigDecimal!
-
-  # User Count
-  userCount: BigInt!
-
-  # Timestamp
   timestamp: BigInt!
-
-  # Block
   block: BigInt!
-
-  # Entry USD
-  entryUSD: BigDecimal!
-
-  # Exit USD
-  exitUSD: BigDecimal!
-
-  # Soul harvested
-  soulHarvested: BigDecimal!
-
-  # Soul harvested
-  soulHarvestedUSD: BigDecimal!
 }
 
 type User @entity {
   # Pool id concatenated with user address
   id: ID!
 
-  # User address
   address: Bytes!
-
-  # Related pool
   pool: Pool
 
-  # We do some fancy math here. Basically, any point in time, the amount of SOULs
-  # entitled to a user but is pending to be distributed is:
-  # pending reward = (user.amount * pool.accSoulPerShare) - user.rewardDebt
-  # Whenever a user deposits or withdraws LP tokens to a pool. Here's what happens:
-  # 1. The pool's `accSoulPerShare` (and `lastRewardTime`) gets updated.
-  # 2. User receives the pending reward sent to his/her address.
-  # 3. User's `amount` gets updated.
-  # 4. User's `rewardDebt` gets updated.
-
-  # Amount
   amount: BigInt!
-
-  # Reward debt
   rewardDebt: BigInt!
+  soulHarvested: BigInt!
 
-  # Entry USD
-  entryUSD: BigDecimal!
-
-  # Exit USD
-  exitUSD: BigDecimal!
-
-  # Soul harvested
-  soulHarvested: BigDecimal!
-
-  # Soul harvested
-  soulHarvestedUSD: BigDecimal!
-
-  # Timestamp
   timestamp: BigInt!
-
-  # Block
   block: BigInt!
 }

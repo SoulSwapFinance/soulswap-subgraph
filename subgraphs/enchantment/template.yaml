@@ -21,7 +21,7 @@ dataSources:
       abis:
         - name: Enchantment
           file: ./config/abis/enchantment.json
-        - name: Seance
+        - name: SeanceToken
           file: ./config/abis/seance.json
         - name: Pair
           file: ./config/abis/pair.json

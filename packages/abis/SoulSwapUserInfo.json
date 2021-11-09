@@ -35,7 +35,7 @@
       },
       {
         "components": [
-          { "internalType": "uint256", "name": "lastRewardBlock", "type": "uint256" },
+          { "internalType": "uint256", "name": "lastRewardTime", "type": "uint256" },
           { "internalType": "uint256", "name": "accSoulPerShare", "type": "uint256" },
           { "internalType": "uint256", "name": "balance", "type": "uint256" },
           { "internalType": "uint256", "name": "totalSupply", "type": "uint256" },

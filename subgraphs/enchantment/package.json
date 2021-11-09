@@ -1,12 +1,12 @@
 {
-    "name": "enchant",
+    "name": "enchantment",
     "license": "MIT",
     "version": "1.0.0",
     "author": "SoulSwapFinance",
     "scripts": {
         "codegen": "graph codegen subgraph.yaml",
         "build": "graph build subgraph.yaml",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ /soulswapfinance/enchant subgraph.yaml",
+        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/enchantment subgraph.yaml",
         "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/soulswap",
         "remove-local": "graph remove --node http://localhost:8020/ /soulswapfinance/soulswap",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/soulswap",

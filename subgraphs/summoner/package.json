@@ -1,19 +1,24 @@
 {
-    "name": "summoner",
+    "name": "exchange",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "author": "SoulSwap",
+    "files": [
+        "generated"
+    ],
     "scripts": {
         "codegen": "graph codegen subgraph.yaml",
         "build": "graph build subgraph.yaml",
-        "rebuild": "rm -rf build && rm -rf subgraph.yaml && yarn prepare:fantom && yarn codegen && yarn build",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/soul-summoner subgraph.yaml",
-        "deploy-studio": "graph deploy --studio soul---summoner",
-        
-        "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/soul-summoner",
-        "remove-local": "graph remove --node http://localhost:8020/ /soulswapfinance/soul-summoner",
-        
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/soul-summoner",
-        "prepare:fantom": "mustache config/fantom.json template.yaml > subgraph.yaml"
+        "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/sushiswap",
+        "remove-local": "graph remove --node http://localhost:8020/ /soulswapfinance/sushiswap",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/summoner",
+
+        "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/summoner subgraph.yaml",
+        "deploy:fantom": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/fantom-summoner subgraph.yaml",
+
+        "deploy-studio:mainnet": "graph deploy --studio sushi---mainnet-exchange",
+
+        "prepare:fantom": "mustache ../../config/fantom.json template.yaml > subgraph.yaml",
+        "prepare:mainnet": "mustache ../../config/mainnet.json template.yaml > subgraph.yaml"
     }
 }

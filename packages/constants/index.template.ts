@@ -43,6 +43,10 @@ export const SEANCE_CIRCLE_ADDRESS = Address.fromString(
   '{{ seance_circle_address }}{{^seance_circle_address}}0x0000000000000000000000000000000000000000{{/seance_circle_address}}'
 )
 
+export const SEANCE_TOKEN_ADDRESS = Address.fromString(
+  '{{ seance_circle_address }}{{^seance_circle_address}}0x0000000000000000000000000000000000000000{{/seance_circle_address}}'
+)
+
 export const SOUL_REAPER_ADDRESS = Address.fromString(
   '{{ soul_reaper_address }}{{^soul_reaper_address}}0x0000000000000000000000000000000000000000{{/soul_reaper_address}}'
 )
@@ -66,6 +70,10 @@ export const SEANCE_WETH_PAIR_ADDRESS = Address.fromString(
 export const SOUL_DISTRIBUTOR_ADDRESS = Address.fromString(
   '{{ soul_distributor_address }}{{^soul_distributor_address}}0x0000000000000000000000000000000000000000{{/soul_distributor_address}}'
 )
+
+export const ALCX_REWARDER = Address.fromString('0x7519c93fc5073e15d89131fd38118d73a72370f8')
+
+export const LIDO_REWARDER = Address.fromString('0x75ff3dd673ef9fc459a52e1054db5df2a1101212')
 
 export const USDC_WETH_PAIR =
   '{{ usdc_weth_pair }}{{^usdc_weth_pair}}0x0000000000000000000000000000000000000000{{/usdc_weth_pair}}'

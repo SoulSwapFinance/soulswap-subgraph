@@ -1,0 +1,51 @@
+specVersion: 0.0.3
+description: SoulSummoner
+repository: https://github.com/soulswapfinance/soulswap-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SoulSummoner
+    network: {{ network }}
+    source:
+      address: '{{ address }}'
+      abi: SoulSummoner
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - SoulSummoner
+        - History
+        - Pool
+        - PoolHistory
+        - User
+      abis:
+        - name: SoulSummoner
+          file: ./config/abis/summoner.json
+        - name: Factory
+          file: ./config/abis/factory.json
+        - name: Pair
+          file: ./config/abis/pair.json
+        - name: ERC20
+          file: ./config/abis/ERC20.json
+      eventHandlers:
+        - event: Deposit(indexed address,indexed uint256,uint256)
+          handler: deposit
+        - event: Withdraw(indexed address,indexed uint256,uint256,uint256)
+          handler: Withdraw
+      callHandlers:
+        - function: addPool(uint256,address,bool)
+          handler: addPool
+        - function: set(uint256,uint256,bool)
+          handler: set
+        - function: massUpdatePools()
+          handler: massUpdatePools
+        - function: updatePool(uint256)
+          handler: updatePool
+        - function: setMigrator(address)
+          handler: setMigrator
+        - function: migrate(uint256)
+          handler: migrate
+      file: ./src/summoner.ts
