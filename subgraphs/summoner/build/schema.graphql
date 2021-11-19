@@ -1,0 +1,64 @@
+type Summoner @entity {
+  # Contract address
+  id: ID!
+
+  #owner: Bytes!
+  #migrator: Bytes!
+
+  #soulPerSecond: BgInt! not needed till fully migrated over
+  totalAllocPoint: BigInt!
+
+  pools: [Pool!] @derivedFrom(field: "summoner")
+  poolCount: BigInt!
+
+  #history: [History!]! @derivedFrom(field: "summoner")
+
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+type Pool @entity {
+  # Index of pool in poolInfo on Summoner contract
+  id: ID!
+  summoner: Summoner!
+  pair: Bytes!
+
+  rewarder: Rewarder
+
+  allocPoint: BigInt!
+  lastRewardTime: BigInt!
+  accSoulPerShare: BigInt!
+
+  slpBalance: BigInt!
+
+  users: [User!]! @derivedFrom(field: "pool")
+  userCount: BigInt!
+
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+type Rewarder @entity {
+  # address
+  id: ID!
+  rewardToken: Bytes!
+  rewardPerSecond: BigInt!
+
+  timestamp: BigInt!
+  block: BigInt!
+}
+
+type User @entity {
+  # Pool id concatenated with user address
+  id: ID!
+
+  address: Bytes!
+  pool: Pool
+
+  amount: BigInt!
+  rewardDebt: BigInt!
+  soulHarvested: BigInt!
+
+  timestamp: BigInt!
+  block: BigInt!
+}

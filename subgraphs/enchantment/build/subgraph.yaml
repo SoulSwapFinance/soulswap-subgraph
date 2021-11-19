@@ -1,0 +1,31 @@
+specVersion: 0.0.3
+description: Enchantment
+repository: https://github.com/soulswapfinance/soulswap-subgraph
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Enchantment
+    network: fantom
+    source:
+      address: "0x6a1a8368D607c7a808F7BbA4F7aEd1D9EbDE147a"
+      abi: Enchantment
+      startBlock: 20509986
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Enchantment
+        - User
+      abis:
+        - name: Enchantment
+          file: Enchantment/config/abis/enchantment.json
+        - name: SeanceToken
+          file: Enchantment/config/abis/seance.json
+        - name: Pair
+          file: Enchantment/config/abis/pair.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: transfer
+      file: Enchantment/Enchantment.wasm

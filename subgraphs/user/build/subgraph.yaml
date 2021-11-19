@@ -1,0 +1,49 @@
+specVersion: 0.0.3
+description: Exchange
+repository: https://github.com/soulswapfinance/soulswap-subgraph
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Factory
+    network: fantom
+    source:
+      address: "0x1120e150da9def6fe930f4feded18ef57c0ca7ef"
+      abi: Factory
+      startBlock: 16108819
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: Factory/Factory.wasm
+      entities:
+        - User
+      abis:
+        - name: Factory
+          file: Factory/packages/abis/factory.json
+        - name: Pair
+          file: Factory/packages/abis/pair.json
+      eventHandlers:
+        - event: PairCreated(indexed address,indexed address,address,uint256)
+          handler: onPairCreated
+templates:
+  - kind: ethereum/contract
+    name: Pair
+    network: fantom
+    source:
+      abi: Pair
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: templates/Pair/Pair.wasm
+      entities:
+        - User
+      abis:
+        - name: Factory
+          file: Pair/packages/abis/factory.json
+        - name: Pair
+          file: Pair/packages/abis/pair.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: onTransfer
