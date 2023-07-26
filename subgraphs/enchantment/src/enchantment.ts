@@ -4,7 +4,7 @@ import {
     BIG_DECIMAL_1E6,
     BIG_DECIMAL_ZERO,
     ENCHANT_ADDRESS,
-    SEANCE_TOKEN_ADDRESS,
+    SEANCE_CIRCLE_ADDRESS,
     SEANCE_USDC_PAIR_ADDRESS,
   } from 'const'
   import { Address, BigDecimal, BigInt, dataSource, ethereum, log } from '@graphprotocol/graph-ts'
@@ -148,7 +148,7 @@ import {
     const seancePrice = getSeancePrice()
   
     enchantment.totalSupply = enchantmentContract.totalSupply().divDecimal(BIG_DECIMAL_1E18)
-    enchantment.seanceStaked = SeanceTokenContract.bind(SEANCE_TOKEN_ADDRESS)
+    enchantment.seanceStaked = SeanceTokenContract.bind(SEANCE_CIRCLE_ADDRESS)
       .balanceOf(ENCHANT_ADDRESS)
       .divDecimal(BIG_DECIMAL_1E18)
     enchantment.ratio = enchantment.seanceStaked.div(enchantment.totalSupply)

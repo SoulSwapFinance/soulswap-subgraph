@@ -2,8 +2,6 @@ import {
     ADDRESS_ZERO,
     BIG_INT_ZERO,
     CONVEX_REWARDERS,
-    ALCX_REWARDER,
-    LIDO_REWARDER,
   } from 'const'
   import { Address, ethereum } from '@graphprotocol/graph-ts'
   
@@ -26,16 +24,6 @@ import {
       // rewarders that need token to be hardcoded
       if (CONVEX_REWARDERS.includes(address)) {
         rewarder.rewardToken = Address.fromString('0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b')
-      }
-      else if (address == ALCX_REWARDER) {
-        rewarder.rewardToken = Address.fromString('0xdbdb4d16eda451d0503b854cf79d55697f90c8df')
-      }
-      else if (address == LIDO_REWARDER) {
-        const rewarderContract = StakingRewardsContract.bind(address)
-        rewarder.rewardToken = rewarderContract.rewardToken()
-        rewarder.rewardPerSecond = rewarderContract.rewardPerSecond()
-  
-        StakingRewardsTemplate.create(address)
       }
       else {
         const rewarderContract = CloneRewarderTimeContract.bind(address)
@@ -68,11 +56,6 @@ import {
     if (CONVEX_REWARDERS.includes(address)) {
       const rewarderContract = ConvexRewarderContract.bind(address)
       let rewardRate = rewarderContract.rewardRate()
-      rewarder.rewardPerSecond = rewardRate
-    }
-    if (address == ALCX_REWARDER) {
-      const rewarderContract = ComplexRewarderContract.bind(address)
-      let rewardRate = rewarderContract.tokenPerBlock()
       rewarder.rewardPerSecond = rewardRate
     }
   
