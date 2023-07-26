@@ -3,16 +3,12 @@ import {
   // BIG_DECIMAL_1E18,
   BIG_DECIMAL_ONE,
   BIG_DECIMAL_ZERO,
-  DAI,
-  DAI_WETH_PAIR,
   FACTORY_ADDRESS,
   MINIMUM_LIQUIDITY_THRESHOLD_ETH,
   NATIVE,
-  SOUL_USDT_PAIR,
+  SOUL_USDC_PAIR,
   USDC,
   USDC_WETH_PAIR,
-  USDT,
-  USDT_WETH_PAIR,
   // WHITELIST,
 } from 'const'
 import { Address, BigDecimal, ethereum, log } from '@graphprotocol/graph-ts' //  BigInt, dataSource
@@ -26,7 +22,7 @@ import { Pair as PairContract } from '../generated/templates/Pair/Pair'
 export const factoryContract = FactoryContract.bind(FACTORY_ADDRESS)
 
 export function getSoulPrice(): BigDecimal {
-  const pair = Pair.load(SOUL_USDT_PAIR)
+  const pair = Pair.load(SOUL_USDC_PAIR)
 
   if (pair) {
     return pair.token1Price
@@ -64,106 +60,47 @@ export function getEthPrice(block: ethereum.Block = null): BigDecimal {
   }*/
 
   // fetch eth prices for each stablecoin
-  const daiPair = Pair.load(DAI_WETH_PAIR)
   const usdcPair = Pair.load(USDC_WETH_PAIR)
-  const usdtPair = Pair.load(USDT_WETH_PAIR)
-
-  // if (daiPair !== null) {
-  //   log.warning('Dai Pair {} {}', [
-  //     daiPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH) ? 'true' : 'false',
-  //     daiPair.reserveETH.toString(),
-  //   ])
-  // }
-
-  // if (usdcPair !== null) {
-  //   log.warning('Usdc Pair {} {}', [
-  //     usdcPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH) ? 'true' : 'false',
-  //     usdcPair.reserveETH.toString(),
-  //   ])
-  // }
-
-  // if (usdcPair !== null) {
-  //   log.warning('Usdt Pair {} {}', [
-  //     usdtPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH) ? 'true' : 'false',
-  //     usdtPair.reserveETH.toString(),
-  //   ])
-  // }
 
   if (
-    daiPair !== null &&
-    daiPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH) &&
-    usdcPair !== null &&
-    usdcPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH) &&
-    usdtPair !== null &&
-    usdtPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)
-  ) {
-    const isDaiFirst = daiPair.token0 == DAI
-    const isUsdcFirst = usdcPair.token0 == USDC
-    const isUsdtFirst = usdtPair.token0 == USDT
-
-    const daiPairEth = isDaiFirst ? daiPair.reserve1 : daiPair.reserve0
-
-    const usdcPairEth = isUsdcFirst ? usdcPair.reserve1 : usdcPair.reserve0
-
-    const usdtPairEth = isUsdtFirst ? usdtPair.reserve1 : usdtPair.reserve0
-
-    const totalLiquidityETH = daiPairEth.plus(usdcPairEth).plus(usdtPairEth)
-
-    const daiWeight = !isDaiFirst ? daiPair.reserve0.div(totalLiquidityETH) : daiPair.reserve1.div(totalLiquidityETH)
-
-    const usdcWeight = !isUsdcFirst
-      ? usdcPair.reserve0.div(totalLiquidityETH)
-      : usdcPair.reserve1.div(totalLiquidityETH)
-
-    const usdtWeight = !isUsdtFirst
-      ? usdtPair.reserve0.div(totalLiquidityETH)
-      : usdtPair.reserve1.div(totalLiquidityETH)
-
-    const daiPrice = isDaiFirst ? daiPair.token0Price : daiPair.token1Price
-
-    const usdcPrice = isUsdcFirst ? usdcPair.token0Price : usdcPair.token1Price
-
-    const usdtPrice = isUsdtFirst ? usdtPair.token0Price : usdtPair.token1Price
-
-    return daiPrice.times(daiWeight).plus(usdcPrice.times(usdcWeight)).plus(usdtPrice.times(usdtWeight))
-
-    // dai and USDC have been created
-  } else if (
-    daiPair !== null &&
-    daiPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH) &&
     usdcPair !== null &&
     usdcPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)
   ) {
-    const isDaiFirst = daiPair.token0 == DAI
     const isUsdcFirst = usdcPair.token0 == USDC
-
-    const daiPairEth = isDaiFirst ? daiPair.reserve1 : daiPair.reserve0
-
     const usdcPairEth = isUsdcFirst ? usdcPair.reserve1 : usdcPair.reserve0
 
-    const totalLiquidityETH = daiPairEth.plus(usdcPairEth)
-
-    const daiWeight = !isDaiFirst ? daiPair.reserve0.div(totalLiquidityETH) : daiPair.reserve1.div(totalLiquidityETH)
+    const totalLiquidityETH = usdcPairEth
 
     const usdcWeight = !isUsdcFirst
       ? usdcPair.reserve0.div(totalLiquidityETH)
       : usdcPair.reserve1.div(totalLiquidityETH)
 
-    const daiPrice = isDaiFirst ? daiPair.token0Price : daiPair.token1Price
+    const usdcPrice = isUsdcFirst ? usdcPair.token0Price : usdcPair.token1Price
+
+    return  usdcPrice.times(usdcWeight)
+
+    // dai and USDC have been created
+  } else if (
+    usdcPair !== null &&
+    usdcPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)
+  ) {
+    const isUsdcFirst = usdcPair.token0 == USDC
+
+    const usdcPairEth = isUsdcFirst ? usdcPair.reserve1 : usdcPair.reserve0
+
+    const totalLiquidityETH = usdcPairEth
+
+    const usdcWeight = !isUsdcFirst
+      ? usdcPair.reserve0.div(totalLiquidityETH)
+      : usdcPair.reserve1.div(totalLiquidityETH)
 
     const usdcPrice = isUsdcFirst ? usdcPair.token0Price : usdcPair.token1Price
 
-    return daiPrice.times(daiWeight).plus(usdcPrice.times(usdcWeight))
+    return usdcPrice.times(usdcWeight)
     // USDC is the only pair so far
   } else if (usdcPair !== null && usdcPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
     const isUsdcFirst = usdcPair.token0 == USDC
     return isUsdcFirst ? usdcPair.token0Price : usdcPair.token1Price
-  } else if (usdtPair !== null && usdtPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
-    const isUsdtFirst = usdtPair.token0 == USDT
-    return isUsdtFirst ? usdtPair.token0Price : usdtPair.token1Price
-  } else if (daiPair !== null && daiPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
-    const isDaiFirst = daiPair.token0 == DAI
-    return isDaiFirst ? daiPair.token0Price : daiPair.token1Price
   } else {
     log.warning('No eth pair...', [])
     return BIG_DECIMAL_ZERO

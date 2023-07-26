@@ -4,15 +4,13 @@
   "soul_address": "0xe2fb177009ff39f52c0134e8007fa0e4baacbd07",
 
   "soul_weth_pair": "0xa2527af9dabf3e3b4979d7e0493b5e2c6e63dc57",
-  "usdc_weth_pair": "0x160653f02b6597e7db00ba8ca826cf43d2f39556",
-  "dai_weth_pair": "0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b",
-  "usdt_weth_pair": "0xdc24814ad654986928f8e4aec48d37fa30bbc5bb",
+  "usdc_weth_pair": "0x5ced9d6b44a1f7c927af31a8af26def60c776712",
+  "dai_weth_pair": "0x5ced9d6b44a1f7c927af31a8af26def60c776712",
+  "usdt_weth_pair": "0x5ced9d6b44a1f7c927af31a8af26def60c776712",
 
   "weth_address": "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
   "native_address": "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
-  "dai_address": "0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e",
-  "usdt_address": "0x049d68029688eabf473097a2fc38ef61633a3c7a",
-  "usdc_address": "0x04068da6c83afcfa0e13ba15a6696662335d5b75",
+  "usdc_address": "0x1b6382dbdea11d97f24495c9a90b7c88469134a4",
   "minimum_liquidity_threshold_eth": "100",
   "minimum_usd_threshold_new_pairs": "100",
   "factory": {
@@ -22,9 +20,7 @@
   "whitelist": [
     "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",
     "0xad84341756bf337f5a0164515b1f6f993d194e1f",
-    "0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e",
-    "0x74b23882a30290451a17c44f4f05243b6b58c76d",
-    "0x04068da6c83afcfa0e13ba15a6696662335d5b75",
-    "0x049d68029688eabf473097a2fc38ef61633a3c7a"
+    "0xfe7eda5f2c56160d406869a8aa4b2f365d544c7b",
+    "0x1b6382dbdea11d97f24495c9a90b7c88469134a4"
   ]
 }

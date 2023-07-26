@@ -47,7 +47,7 @@ export const SOUL_ADDRESS = Address.fromString(
   '{{ soul_address }}{{^soul_address}}0x0000000000000000000000000000000000000000{{/soul_address}}'
 )
 
-export const SOUL_USDT_PAIR_ADDRESS = Address.fromString(
+export const SOUL_USDC_PAIR_ADDRESS = Address.fromString(
   '{{ soul_usdt_pair_address }}{{^soul_usdt_pair_address}}0x0000000000000000000000000000000000000000{{/soul_usdt_pair_address}}'
 )
 
@@ -62,13 +62,7 @@ export const SEANCE_WETH_PAIR_ADDRESS = Address.fromString(
 export const USDC_WETH_PAIR =
   '{{ usdc_weth_pair }}{{^usdc_weth_pair}}0x0000000000000000000000000000000000000000{{/usdc_weth_pair}}'
 
-export const DAI_WETH_PAIR =
-  '{{ dai_weth_pair }}{{^dai_weth_pair}}0x0000000000000000000000000000000000000000{{/dai_weth_pair}}'
-
-export const USDT_WETH_PAIR =
-  '{{ usdt_weth_pair }}{{^usdt_weth_pair}}0x0000000000000000000000000000000000000000{{/usdt_weth_pair}}'
-
-export const SOUL_USDT_PAIR =
+export const SOUL_USDC_PAIR =
   '{{ soul_usdt_pair }}{{^soul_usdt_pair}}0x0000000000000000000000000000000000000000{{/soul_usdt_pair}}'
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
@@ -83,12 +77,8 @@ export const WETH_ADDRESS = Address.fromString(
   '{{ weth_address }}{{^weth_address}}0x0000000000000000000000000000000000000000{{/weth_address}}'
 )
 
-export const SOULSWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString(
+export const SOULSWAP_WETH_USDC_PAIR_ADDRESS = Address.fromString(
   '{{ soulswap_weth_usdt_pair_address }}{{^soulswap_weth_usdt_pair_address}}0x0000000000000000000000000000000000000000{{/soulswap_weth_usdt_pair_address}}'
-)
-
-export const USDT_ADDRESS = Address.fromString(
-  '{{ usdt_address }}{{^usdt_address}}0x0000000000000000000000000000000000000000{{/usdt_address}}'
 )
 
 export const NATIVE = Address.fromString('{{ native_address }}{{^native_address}}0x0000000000000000000000000000000000000000{{/native_address}}')

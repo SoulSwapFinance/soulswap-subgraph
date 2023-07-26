@@ -9,16 +9,16 @@
     "scripts": {
         "codegen": "graph codegen subgraph.yaml",
         "build": "graph build subgraph.yaml",
-        "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/soulswap",
-        "remove-local": "graph remove --node http://localhost:8020/ /soulswapfinance/soulswap",
-        "deploy": "graph deploy soulswapfinance/exchange-fantom --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/soulswap",
+        "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/fantom-swap",
+        "remove-local": "graph remove --node http://localhost:8020/ /soulswapfinance/fantom-swap",
+        "deploy": "graph deploy soulswapfinance/fantom-swap --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/fantom-swap",
 
         "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/exchange subgraph.yaml",
-        "deploy:fantom": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/fantom-exchange subgraph.yaml",
+        "deploy:fantom": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/fantom-swap subgraph.yaml",
 
         "deploy-studio:mainnet": "graph deploy --studio soul---mainnet-exchange",
-        "deploy-studio:fantom": "graph deploy --studio fantom-exchange",
+        "deploy-studio:fantom": "graph deploy --studio fantom-swap",
 
         "prepare:fantom": "mustache ../../config/fantom.json template.yaml > subgraph.yaml",
         "prepare:mainnet": "mustache ../../config/mainnet.json template.yaml > subgraph.yaml"

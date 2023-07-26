@@ -26,8 +26,6 @@ dataSources:
           file: ./config/abis/Summoner.json
         - name: ConvexRewarder
           file: ./config/abis/ConvexRewarder.json
-        - name: ComplexRewarder
-          file: ./config/abis/ComplexRewarder.json
         - name: CloneRewarderTime
           file: ./config/abis/CloneRewarderTime.json
         - name: StakingRewardsSoul

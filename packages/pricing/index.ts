@@ -6,10 +6,10 @@ import {
   BIG_DECIMAL_ZERO,
   FACTORY_ADDRESS,
   FACTORY_START_BLOCK,
-  USDT_ADDRESS,
   SOUL_ADDRESS,
-  SOULSWAP_WETH_USDT_PAIR_ADDRESS,
-  SOUL_USDT_PAIR_ADDRESS,
+  USDC_ADDRESS,
+  SOULSWAP_WETH_USDC_PAIR_ADDRESS,
+  SOUL_USDC_PAIR_ADDRESS,
   WETH_ADDRESS,
 } from "const";
 import {
@@ -26,10 +26,10 @@ import { Pair as PairContract } from "exchange/generated/Factory/Pair";
 export function getUSDRate(token: Address, block: ethereum.Block): BigDecimal {
   const usdt = BIG_DECIMAL_ONE;
 
-  if (token != USDT_ADDRESS) {
+  if (token != USDC_ADDRESS) {
     const address = block.number.le(BigInt.fromI32(10829344))
-      ? SOULSWAP_WETH_USDT_PAIR_ADDRESS
-      : SOULSWAP_WETH_USDT_PAIR_ADDRESS;
+      ? SOULSWAP_WETH_USDC_PAIR_ADDRESS
+      : SOULSWAP_WETH_USDC_PAIR_ADDRESS;
 
     const tokenPriceETH = getEthRate(token, block);
 
@@ -101,8 +101,8 @@ export function getSoulPrice(block: ethereum.Block): BigDecimal {
     // Else get price from either soul or soul (kek) usdt pair depending on space-time
     const pair = PairContract.bind(
       block.number.le(BigInt.fromI32(10829344))
-        ? SOUL_USDT_PAIR_ADDRESS
-        : SOUL_USDT_PAIR_ADDRESS
+        ? SOUL_USDC_PAIR_ADDRESS
+        : SOUL_USDC_PAIR_ADDRESS
     );
     const reservesResult = pair.try_getReserves()
     if(!reservesResult.reverted) {

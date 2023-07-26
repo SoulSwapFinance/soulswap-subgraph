@@ -5,7 +5,6 @@ import {
   } from 'const'
   import { Address, ethereum } from '@graphprotocol/graph-ts'
   
-  import { ComplexRewarder as ComplexRewarderContract } from '../../generated/Summoner/ComplexRewarder'
   import { ConvexRewarder as ConvexRewarderContract } from '../../generated/Summoner/ConvexRewarder'
   import { CloneRewarderTime as CloneRewarderTimeContract } from '../../generated/templates/CloneRewarderTime/CloneRewarderTime'
   import { CloneRewarderTime as CloneRewarderTimeTemplate } from '../../generated/templates'

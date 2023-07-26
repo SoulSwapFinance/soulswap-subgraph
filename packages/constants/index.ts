@@ -48,8 +48,12 @@ export const SOUL_ADDRESS = Address.fromString(
   "0xe2fb177009ff39f52c0134e8007fa0e4baacbd07"
 )
 
-export const SOUL_USDT_PAIR_ADDRESS = Address.fromString(
-  "0xe27cc06a7f34892bc17a5474303b91b2c9f3f21a"
+export const USDC_ADDRESS = Address.fromString(
+  "0x1b6382dbdea11d97f24495c9a90b7c88469134a4"
+)
+
+export const SOUL_USDC_PAIR_ADDRESS = Address.fromString(
+  "0x5ced9d6b44a1f7c927af31a8af26def60c776712"
 )
 
 export const SEANCE_USDC_PAIR_ADDRESS = Address.fromString(
@@ -60,22 +64,13 @@ export const SEANCE_WETH_PAIR_ADDRESS = Address.fromString(
   "0x8542beac34282afe5bb6951eb6dce0b3783b7fab"
 )
 
-export const COMPLEX_REWARDER = Address.fromString(
-  '{{ complex_rewarder_address }}{{^complex_rewarder_address}}0x0000000000000000000000000000000000000000{{/complex_rewarder_address}}'
-)
-
 export const CONVEX_REWARDERS: Array<Address> = [
   Address.fromString('0x9e01aac4b3e8781a85b21d9d9f848e72af77b362'),
   Address.fromString('0x1fd97b5e5a257b0b9b9a42a96bb8870cbdd1eb79'),
 ]
 
-export const USDC_WETH_PAIR = "0x160653f02b6597e7db00ba8ca826cf43d2f39556"
-
-export const DAI_WETH_PAIR = "0xf3d6e8ecece8647b456d57375ce0b51b8f0cd40b"
-
-export const USDT_WETH_PAIR = "0xdc24814ad654986928f8e4aec48d37fa30bbc5bb"
-
-export const SOUL_USDT_PAIR = "0xe27cc06a7f34892bc17a5474303b91b2c9f3f21a"
+export const USDC_WETH_PAIR = "0xd1a432df5ee2df3f891f835854ffea072c273c65"
+export const SOUL_USDC_PAIR = "0x5ced9d6b44a1f7c927af31a8af26def60c776712"
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
 export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString(
@@ -89,21 +84,15 @@ export const WETH_ADDRESS = Address.fromString(
   "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83"
 )
 
-export const SOULSWAP_WETH_USDT_PAIR_ADDRESS = Address.fromString(
-  "0xdc24814ad654986928f8e4aec48d37fa30bbc5bb"
-)
-
-export const USDT_ADDRESS = Address.fromString(
-  "0x049d68029688eabf473097a2fc38ef61633a3c7a"
+export const SOULSWAP_WETH_USDC_PAIR_ADDRESS = Address.fromString(
+  "0x5ced9d6b44a1f7c927af31a8af26def60c776712"
 )
 
 export const NATIVE = Address.fromString("0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83")
 // export const NATIVE = Address.fromString("0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83")
-export const USDC = "0x04068da6c83afcfa0e13ba15a6696662335d5b75"
-export const USDT = "0x049d68029688eabf473097a2fc38ef61633a3c7a"
-export const DAI = "0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e"
+export const USDC = "0x1b6382dbdea11d97f24495c9a90b7c88469134a4"
 
-export const WHITELIST: string[] = "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83,0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e,0x74b23882a30290451a17c44f4f05243b6b58c76d,0x04068da6c83afcfa0e13ba15a6696662335d5b75,0x049d68029688eabf473097a2fc38ef61633a3c7a".split(",")
+export const WHITELIST: string[] = "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83,0xfe7eda5f2c56160d406869a8aa4b2f365d544c7b,0x1b6382dbdea11d97f24495c9a90b7c88469134a4".split(",")
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const CUSTOM_BASES = new Map<string, string>()
