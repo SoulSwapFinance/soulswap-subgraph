@@ -1,4 +1,4 @@
-import { ADDRESS_ZERO, BIG_DECIMAL_ZERO, SUMMONER_ADDRESS, MINIMUM_USD_THRESHOLD_NEW_PAIRS, WHITELIST } from 'const'
+import { ADDRESS_ZERO, BIG_DECIMAL_ZERO, SUMMONER_ADDRESS, MULTICHAIN_END_BLOCK, MINIMUM_USD_THRESHOLD_NEW_PAIRS, WHITELIST } from 'const'
 import { Address, BigDecimal, BigInt, dataSource, log, store } from '@graphprotocol/graph-ts'
 import { Burn, Mint, Pair, Swap, Token, Transaction } from '../../generated/schema'
 import {

@@ -5,13 +5,17 @@ import {
   BIG_DECIMAL_ZERO,
   FACTORY_ADDRESS,
   MINIMUM_LIQUIDITY_THRESHOLD_ETH,
+  MULTICHAIN_END_BLOCK,
   NATIVE,
+  SOULSWAP_SOUL_USDC_PAIR,
+  SOULSWAP_SOUL_USDC_PAIR_ADDRESS,
+  SOULSWAP_USDC,
   SOUL_USDC_PAIR,
   USDC,
   USDC_WETH_PAIR,
   // WHITELIST,
 } from 'const'
-import { Address, BigDecimal, ethereum, log } from '@graphprotocol/graph-ts' //  BigInt, dataSource
+import { Address, BigDecimal, BigInt, ethereum, log } from '@graphprotocol/graph-ts' //  BigInt, dataSource
 import { Pair, Token } from '../generated/schema'
 
 import { Factory as FactoryContract } from '../generated/templates/Pair/Factory'
@@ -21,8 +25,9 @@ import { Pair as PairContract } from '../generated/templates/Pair/Pair'
 
 export const factoryContract = FactoryContract.bind(FACTORY_ADDRESS)
 
-export function getSoulPrice(): BigDecimal {
-  const pair = Pair.load(SOUL_USDC_PAIR)
+export function getSoulPrice(block: ethereum.Block = null): BigDecimal {
+  const pairAddress = block.number.lt(MULTICHAIN_END_BLOCK) ? SOULSWAP_SOUL_USDC_PAIR : SOUL_USDC_PAIR
+  const pair = Pair.load(pairAddress)
 
   if (pair) {
     return pair.token1Price
@@ -66,7 +71,7 @@ export function getEthPrice(block: ethereum.Block = null): BigDecimal {
     usdcPair !== null &&
     usdcPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)
   ) {
-    const isUsdcFirst = usdcPair.token0 == USDC
+    const isUsdcFirst = usdcPair.token0 == (block.number.lt(MULTICHAIN_END_BLOCK) ? SOULSWAP_USDC : USDC)
     const usdcPairEth = isUsdcFirst ? usdcPair.reserve1 : usdcPair.reserve0
 
     const totalLiquidityETH = usdcPairEth
@@ -84,7 +89,7 @@ export function getEthPrice(block: ethereum.Block = null): BigDecimal {
     usdcPair !== null &&
     usdcPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)
   ) {
-    const isUsdcFirst = usdcPair.token0 == USDC
+    const isUsdcFirst = usdcPair.token0 == (block.number.lt(MULTICHAIN_END_BLOCK) ? SOULSWAP_USDC : USDC)
 
     const usdcPairEth = isUsdcFirst ? usdcPair.reserve1 : usdcPair.reserve0
 
@@ -98,8 +103,9 @@ export function getEthPrice(block: ethereum.Block = null): BigDecimal {
 
     return usdcPrice.times(usdcWeight)
     // USDC is the only pair so far
-  } else if (usdcPair !== null && usdcPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
-    const isUsdcFirst = usdcPair.token0 == USDC
+  } else if (
+      usdcPair !== null && usdcPair.reserveETH.gt(MINIMUM_LIQUIDITY_THRESHOLD_ETH)) {
+    const isUsdcFirst = usdcPair.token0 == (block.number.lt(MULTICHAIN_END_BLOCK) ? SOULSWAP_USDC : USDC)
     return isUsdcFirst ? usdcPair.token0Price : usdcPair.token1Price
   } else {
     log.warning('No eth pair...', [])
