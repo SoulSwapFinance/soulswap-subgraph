@@ -10,7 +10,10 @@ import {
   USDC_ADDRESS,
   SOULSWAP_WETH_USDC_PAIR_ADDRESS,
   SOUL_USDC_PAIR_ADDRESS,
+  WETH_USDC_PAIR_ADDRESS,
+  MULTICHAIN_END_BLOCK,
   WETH_ADDRESS,
+  SOULSWAP_SOUL_USDC_PAIR_ADDRESS,
 } from "const";
 import {
   Address,
@@ -27,9 +30,9 @@ export function getUSDRate(token: Address, block: ethereum.Block): BigDecimal {
   const usdt = BIG_DECIMAL_ONE;
 
   if (token != USDC_ADDRESS) {
-    const address = block.number.le(BigInt.fromI32(10829344))
+    const address = block.number.le(MULTICHAIN_END_BLOCK)
       ? SOULSWAP_WETH_USDC_PAIR_ADDRESS
-      : SOULSWAP_WETH_USDC_PAIR_ADDRESS;
+      : WETH_USDC_PAIR_ADDRESS;
 
     const tokenPriceETH = getEthRate(token, block);
 
@@ -57,9 +60,9 @@ export function getEthRate(token: Address, block: ethereum.Block): BigDecimal {
 
   if (token != WETH_ADDRESS) {
     const factory = FactoryContract.bind(
-      block.number.le(BigInt.fromI32(10829344))
-        ? FACTORY_ADDRESS
-        : FACTORY_ADDRESS
+      // block.number.le(MULTICHAIN_END_BLOCK)
+        // ? FACTORY_ADDRESS :
+       FACTORY_ADDRESS
     );
 
     const address = factory.getPair(token, WETH_ADDRESS);
@@ -94,14 +97,14 @@ export function getSoulPrice(block: ethereum.Block): BigDecimal {
   if (block.number.lt(FACTORY_START_BLOCK)) {
     // If before uniswap soul-eth pair creation and liquidity added, return zero
     return BIG_DECIMAL_ZERO;
-  } else if (block.number.lt(BigInt.fromI32(10800029))) {
+  } else if (block.number.lt(MULTICHAIN_END_BLOCK)) {
     // Else if before uniswap soul-usdt pair creation (get price from eth soul-eth pair above)
     return getUSDRate(SOUL_ADDRESS, block);
   } else {
     // Else get price from either soul or soul (kek) usdt pair depending on space-time
     const pair = PairContract.bind(
-      block.number.le(BigInt.fromI32(10829344))
-        ? SOUL_USDC_PAIR_ADDRESS
+      block.number.le(MULTICHAIN_END_BLOCK)
+        ? SOULSWAP_SOUL_USDC_PAIR_ADDRESS
         : SOUL_USDC_PAIR_ADDRESS
     );
     const reservesResult = pair.try_getReserves()

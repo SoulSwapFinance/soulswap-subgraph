@@ -16,9 +16,11 @@ export const BIG_INT_ONE_HUNDRED = BigInt.fromI32(100)
 export const BIG_INT_ONE_DAY_SECONDS = BigInt.fromI32(86400)
 export const BIG_INT_ZERO = BigInt.fromI32(0)
 
+export const MULTICHAIN_END_BLOCK = BigInt.fromI32(65138340)  // JUL23 note: multichain collapse / depeg
+// export const MULTICHAIN_END_BLOCK = 65138340  // JUL23 note: multichain collapse / depeg
 export const SUMMONER_START_BLOCK = BigInt.fromI32(17337870); // 23 SEP
 export const SUMMONER_START_TIME = BigInt.fromI32(1632170016); // 23 SEP
-export const FACTORY_START_BLOCK = BigInt.fromI32(16108819); // 23 SEP
+export const FACTORY_START_BLOCK = BigInt.fromI32(23750000); // 23 SEP
 export const ACC_SOUL_PRECISION = BigInt.fromString("1000000000000")
 
 export const PAIR_ADD_COLLATERAL = "addCollateral"
@@ -56,6 +58,10 @@ export const SOUL_USDC_PAIR_ADDRESS = Address.fromString(
   "0x5ced9d6b44a1f7c927af31a8af26def60c776712"
 )
 
+export const SOULSWAP_SOUL_USDC_PAIR_ADDRESS = Address.fromString(
+  "0xc0a301f1e5e0fe37a31657e8f60a41b14d01b0ef"
+)
+
 export const SEANCE_USDC_PAIR_ADDRESS = Address.fromString(
   "0x98c678d3c7ebed4a36b84666700d8b5b5ddc1f79"
 )
@@ -71,6 +77,7 @@ export const CONVEX_REWARDERS: Array<Address> = [
 
 export const USDC_WETH_PAIR = "0xd1a432df5ee2df3f891f835854ffea072c273c65"
 export const SOUL_USDC_PAIR = "0x5ced9d6b44a1f7c927af31a8af26def60c776712"
+export const SOULSWAP_SOUL_USDC_PAIR = "0xc0a301f1e5e0fe37a31657e8f60a41b14d01b0ef"
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
 export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString(
@@ -85,12 +92,17 @@ export const WETH_ADDRESS = Address.fromString(
 )
 
 export const SOULSWAP_WETH_USDC_PAIR_ADDRESS = Address.fromString(
-  "0x5ced9d6b44a1f7c927af31a8af26def60c776712"
+  "0x160653f02b6597e7db00ba8ca826cf43d2f39556"
+)
+
+export const WETH_USDC_PAIR_ADDRESS = Address.fromString(
+  "0xd1a432df5ee2df3f891f835854ffea072c273c65"
 )
 
 export const NATIVE = Address.fromString("0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83")
 // export const NATIVE = Address.fromString("0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83")
 export const USDC = "0x1b6382dbdea11d97f24495c9a90b7c88469134a4"
+export const SOULSWAP_USDC = "0x04068da6c83afcfa0e13ba15a6696662335d5b75"
 
 export const WHITELIST: string[] = "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83,0xfe7eda5f2c56160d406869a8aa4b2f365d544c7b,0x1b6382dbdea11d97f24495c9a90b7c88469134a4".split(",")
 

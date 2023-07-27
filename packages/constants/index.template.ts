@@ -16,8 +16,11 @@ export const BIG_INT_ONE_HUNDRED = BigInt.fromI32(100)
 export const BIG_INT_ONE_DAY_SECONDS = BigInt.fromI32(86400)
 export const BIG_INT_ZERO = BigInt.fromI32(0)
 
+export const MULTICHAIN_END_BLOCK = BigInt.fromI32(65138340)  // JUL23 note: multichain collapse / depeg
+// export const MULTICHAIN_END_BLOCK = 65138340  // JUL23 note: multichain collapse / depeg
+
 export const SUMMONER_START_BLOCK = BigInt.fromI32(17337870); // 23 SEP
-export const FACTORY_START_BLOCK = BigInt.fromI32(16108819); // 23 SEP
+export const FACTORY_START_BLOCK = BigInt.fromI32(23750000); // 23 SEP
 export const ACC_SOUL_PRECISION = BigInt.fromString('1000000000000')
 
 export const PAIR_ADD_COLLATERAL = 'addCollateral'
@@ -47,10 +50,6 @@ export const SOUL_ADDRESS = Address.fromString(
   '{{ soul_address }}{{^soul_address}}0x0000000000000000000000000000000000000000{{/soul_address}}'
 )
 
-export const SOUL_USDC_PAIR_ADDRESS = Address.fromString(
-  '{{ soul_usdt_pair_address }}{{^soul_usdt_pair_address}}0x0000000000000000000000000000000000000000{{/soul_usdt_pair_address}}'
-)
-
 export const SEANCE_USDC_PAIR_ADDRESS = Address.fromString(
   '{{ seance_usdc_pair_address }}{{^seance_usdc_pair_address}}0x0000000000000000000000000000000000000000{{/seance_usdc_pair_address}}'
 )
@@ -77,14 +76,8 @@ export const WETH_ADDRESS = Address.fromString(
   '{{ weth_address }}{{^weth_address}}0x0000000000000000000000000000000000000000{{/weth_address}}'
 )
 
-export const SOULSWAP_WETH_USDC_PAIR_ADDRESS = Address.fromString(
-  '{{ soulswap_weth_usdt_pair_address }}{{^soulswap_weth_usdt_pair_address}}0x0000000000000000000000000000000000000000{{/soulswap_weth_usdt_pair_address}}'
-)
-
 export const NATIVE = Address.fromString('{{ native_address }}{{^native_address}}0x0000000000000000000000000000000000000000{{/native_address}}')
 export const USDC = '{{ usdc_address }}{{^usdc_address}}0x0000000000000000000000000000000000000000{{/usdc_address}}'
-export const USDT = '{{ usdt_address }}{{^usdt_address}}0x0000000000000000000000000000000000000000{{/usdt_address}}'
-export const DAI = '{{ dai_address }}{{^dai_address}}0x0000000000000000000000000000000000000000{{/dai_address}}'
 
 export const WHITELIST: string[] = '{{ whitelist }}'.split(',')
 
