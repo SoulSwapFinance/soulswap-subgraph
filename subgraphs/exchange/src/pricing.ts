@@ -10,6 +10,7 @@ import {
   SOULSWAP_SOUL_USDC_PAIR,
   SOULSWAP_SOUL_USDC_PAIR_ADDRESS,
   SOULSWAP_USDC,
+  SOULSWAP_USDC_WETH_PAIR,
   SOUL_USDC_PAIR,
   USDC,
   USDC_WETH_PAIR,
@@ -25,7 +26,7 @@ import { Pair as PairContract } from '../generated/templates/Pair/Pair'
 
 export const factoryContract = FactoryContract.bind(FACTORY_ADDRESS)
 
-export function getSoulPrice(block: ethereum.Block = null): BigDecimal {
+export function getSoulPrice(block: ethereum.Block): BigDecimal {
   const pairAddress = block.number.lt(MULTICHAIN_END_BLOCK) ? SOULSWAP_SOUL_USDC_PAIR : SOUL_USDC_PAIR
   const pair = Pair.load(pairAddress)
 
@@ -36,7 +37,7 @@ export function getSoulPrice(block: ethereum.Block = null): BigDecimal {
   return BIG_DECIMAL_ZERO
 }
 
-export function getEthPrice(block: ethereum.Block = null): BigDecimal {
+export function getEthPrice(block: ethereum.Block): BigDecimal {
   // TODO: We can can get weighted averages, but this will do for now.
   // If block number is less than or equal to the last stablecoin migration (ETH-USDT), use uniswap eth price.
   // After this last migration, we can use soulswap pricing.
@@ -65,7 +66,7 @@ export function getEthPrice(block: ethereum.Block = null): BigDecimal {
   }*/
 
   // fetch eth prices for each stablecoin
-  const usdcPair = Pair.load(USDC_WETH_PAIR)
+  const usdcPair = Pair.load((block.number.lt(MULTICHAIN_END_BLOCK) ? SOULSWAP_USDC_WETH_PAIR : USDC_WETH_PAIR))
 
   if (
     usdcPair !== null &&
