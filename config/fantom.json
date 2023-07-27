@@ -13,7 +13,7 @@
   "minimum_usd_threshold_new_pairs": "100",
   "factory": {
     "address": "0x1120e150da9def6fe930f4feded18ef57c0ca7ef",
-    "startBlock": "23750000"
+    "startBlock": "16108819"
   },
   "whitelist": [
     "0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83",

@@ -17,10 +17,9 @@ export const BIG_INT_ONE_DAY_SECONDS = BigInt.fromI32(86400)
 export const BIG_INT_ZERO = BigInt.fromI32(0)
 
 export const MULTICHAIN_END_BLOCK = BigInt.fromI32(65138340)  // JUL23 note: multichain collapse / depeg
-// export const MULTICHAIN_END_BLOCK = 65138340  // JUL23 note: multichain collapse / depeg
 export const SUMMONER_START_BLOCK = BigInt.fromI32(17337870); // 23 SEP
 export const SUMMONER_START_TIME = BigInt.fromI32(1632170016); // 23 SEP
-export const FACTORY_START_BLOCK = BigInt.fromI32(23750000); // 23 SEP
+export const FACTORY_START_BLOCK = BigInt.fromI32(16108819); // JUL23 note: sept. 14th, 2021
 export const ACC_SOUL_PRECISION = BigInt.fromString("1000000000000")
 
 export const PAIR_ADD_COLLATERAL = "addCollateral"
@@ -76,6 +75,7 @@ export const CONVEX_REWARDERS: Array<Address> = [
 ]
 
 export const USDC_WETH_PAIR = "0xd1a432df5ee2df3f891f835854ffea072c273c65"
+export const SOULSWAP_USDC_WETH_PAIR = "0x160653f02b6597e7db00ba8ca826cf43d2f39556"
 export const SOUL_USDC_PAIR = "0x5ced9d6b44a1f7c927af31a8af26def60c776712"
 export const SOULSWAP_SOUL_USDC_PAIR = "0xc0a301f1e5e0fe37a31657e8f60a41b14d01b0ef"
 
