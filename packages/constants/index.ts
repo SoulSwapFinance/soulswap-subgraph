@@ -69,7 +69,7 @@ export const CONVEX_REWARDERS: Array<Address> = [
   Address.fromString('0x1fd97b5e5a257b0b9b9a42a96bb8870cbdd1eb79'),
 ]
 
-export const USDC_WETH_PAIR = "0xd1a432df5ee2df3f891f835854ffea072c273c65"
+export const USDC_WETH_PAIR = "0x864384a54ea644852603778c0c200ef2d6f2ac2f"
 export const SOUL_USDC_PAIR = "0x922fcada825dc669798206a35d2d2b455f9a64e7"
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
