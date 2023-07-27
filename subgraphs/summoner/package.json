@@ -14,11 +14,11 @@
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/summoner",
 
         "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/summoner subgraph.yaml",
-        "deploy:fantom": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/fantom-summoner subgraph.yaml",
+        "deploy:avalanche": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/avalanche-summoner subgraph.yaml",
 
         "deploy-studio:mainnet": "graph deploy --studio sushi---mainnet-exchange",
 
-        "prepare:fantom": "mustache ../../config/fantom.json template.yaml > subgraph.yaml",
+        "prepare:avalanche": "mustache ../../config/avalanche.json template.yaml > subgraph.yaml",
         "prepare:mainnet": "mustache ../../config/mainnet.json template.yaml > subgraph.yaml"
     }
 }

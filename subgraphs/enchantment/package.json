@@ -10,6 +10,6 @@
         "create-local": "graph create --node http://localhost:8020/ /soulswapfinance/soulswap",
         "remove-local": "graph remove --node http://localhost:8020/ /soulswapfinance/soulswap",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/soulswap",
-        "prepare:fantom": "mustache config/fantom.json template.yaml > subgraph.yaml"
+        "prepare:avalanche": "mustache config/avalanche.json template.yaml > subgraph.yaml"
     }
 }

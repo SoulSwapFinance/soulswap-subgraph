@@ -10,7 +10,7 @@
     "scripts": {
         "codegen": ".",
         "build": ".",
-        "prepare:fantom": ".",
+        "prepare:avalanche": ".",
         "prepare:mainnet": "."
     }
 }
