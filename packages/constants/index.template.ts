@@ -17,10 +17,8 @@ export const BIG_INT_ONE_DAY_SECONDS = BigInt.fromI32(86400)
 export const BIG_INT_ZERO = BigInt.fromI32(0)
 
 export const MULTICHAIN_END_BLOCK = BigInt.fromI32(65138340)  // JUL23 note: multichain collapse / depeg
-// export const MULTICHAIN_END_BLOCK = 65138340  // JUL23 note: multichain collapse / depeg
-
 export const SUMMONER_START_BLOCK = BigInt.fromI32(17337870); // 23 SEP
-export const FACTORY_START_BLOCK = BigInt.fromI32(23750000); // 23 SEP
+export const FACTORY_START_BLOCK = BigInt.fromI32(17027903); // 23 SEP
 export const ACC_SOUL_PRECISION = BigInt.fromString('1000000000000')
 
 export const PAIR_ADD_COLLATERAL = 'addCollateral'
