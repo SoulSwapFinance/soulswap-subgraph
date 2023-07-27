@@ -85,4 +85,4 @@ Subgraph endpoints:
 Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/soul-summoner
 
 Subgraph endpoints:
-Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/exchange-fantom
+Queries (HTTP):     https://api.thegraph.com/subgraphs/name/soulswapfinance/fantom-swap
