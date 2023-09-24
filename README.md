@@ -7,7 +7,7 @@ The Graph exposes a GraphQL endpoint to query the events and entities within the
 Current subgraph locations:
 
 1. **Exchange**: Includes all SoulSwap Exchange data with Price Data, Volume, Users, etc:
-   + https://thegraph.com/explorer/subgraph/SoulSwapFinance/fantom-exchange (ftm)
+   + https://thegraph.com/explorer/subgraph/SoulSwapFinance/fantom-swap (ftm)
 
 2. **Soul Summoner**: Indexes all SoulSummoner staking data: https://thegraph.com/explorer/subgraph/SoulSwapFinance/soul-summoner
 
