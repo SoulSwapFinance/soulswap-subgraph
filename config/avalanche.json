@@ -2,21 +2,20 @@
   "network": "avalanche",
   "factory_address": "0x5bb2a9984de4a69c05c996f7ef09597ac8c9d63a",
   "soul_address": "0x11d6dd25c1695764e64f439e32cc7746f3945543",
-
-  "soul_weth_pair": "0x6da1ad717c7577aab46c19ab6d3d9c31aff32a00",
+  "soul_usdc_pair": "0x922fcada825dc669798206a35d2d2b455f9a64e7",
   "usdc_weth_pair": "0x864384a54ea644852603778c0c200ef2d6f2ac2f",
-
+  "soulswap_weth_usdc_pair_address": "0x864384a54ea644852603778c0c200ef2d6f2ac2f",
   "weth_address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
   "native_address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
-  "usdc_address": "0x1b6382dbdea11d97f24495c9a90b7c88469134a4",
+  "usdc_address": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
   "minimum_liquidity_threshold_eth": "1",
-  "minimum_usd_threshold_new_pairs": "25",
+  "minimum_usd_threshold_new_pairs": "10",
   "factory": {
     "address": "0x5bb2a9984de4a69c05c996f7ef09597ac8c9d63a",
     "startBlock": "17149268"
   },
   "whitelist": [
     "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
-    "0x1b6382dbdea11d97f24495c9a90b7c88469134a4"
+    "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e"
   ]
 }

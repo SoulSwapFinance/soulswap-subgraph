@@ -8,8 +8,8 @@ import {
   import { ConvexRewarder as ConvexRewarderContract } from '../../generated/Summoner/ConvexRewarder'
   import { CloneRewarderTime as CloneRewarderTimeContract } from '../../generated/templates/CloneRewarderTime/CloneRewarderTime'
   import { CloneRewarderTime as CloneRewarderTimeTemplate } from '../../generated/templates'
-  import { StakingRewardsSoul as StakingRewardsContract} from '../../generated/templates/StakingRewardsSoul/StakingRewardsSoul'
-  import { StakingRewardsSoul as StakingRewardsTemplate } from '../../generated/templates'
+  // import { StakingRewardsSoul as StakingRewardsContract} from '../../generated/templates/StakingRewardsSoul/StakingRewardsSoul'
+  // import { StakingRewardsSoul as StakingRewardsTemplate } from '../../generated/templates'
   import { Rewarder } from '../../generated/schema'
   
   export function getRewarder(address: Address, block: ethereum.Block): Rewarder {

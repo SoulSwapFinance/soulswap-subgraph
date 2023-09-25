@@ -49,7 +49,7 @@ export function getEthPrice(block: ethereum.Block = null): BigDecimal {
 
     const ethUsdtReserves = ethUsdtPairContract.getReserves()
 
-    // TODO: Find out why I'm dividing by 1,000,000... (Oh, probably because USDT?)
+    // TODO: Find out why I'm dividing by 1,000,000... (Oh, probably bc USDT decimals are 6)
     const ethPrice = ethUsdtReserves.value1
       .toBigDecimal()
       .times(BIG_DECIMAL_1E18)

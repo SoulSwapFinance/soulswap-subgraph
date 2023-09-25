@@ -17,15 +17,8 @@ export const BIG_INT_ONE_DAY_SECONDS = BigInt.fromI32(86400)
 export const BIG_INT_ZERO = BigInt.fromI32(0)
 
 export const SUMMONER_START_BLOCK = BigInt.fromI32(17337870); // 23 SEP
-export const FACTORY_START_BLOCK = BigInt.fromI32(16108819); // 23 SEP
+export const FACTORY_START_BLOCK = BigInt.fromI32(17149268); // √
 export const ACC_SOUL_PRECISION = BigInt.fromString('1000000000000')
-
-export const PAIR_ADD_COLLATERAL = 'addCollateral'
-export const PAIR_REMOVE_COLLATERAL = 'removeCollateral'
-export const PAIR_ADD_ASSET = 'addAsset'
-export const PAIR_REMOVE_ASSET = 'removeAsset'
-export const PAIR_BORROW = 'borrow'
-export const PAIR_REPAY = 'repay'
 
 export const FACTORY_ADDRESS = Address.fromString(
   '{{ factory_address }}{{^factory_address}}0x0000000000000000000000000000000000000000{{/factory_address}}'
@@ -35,35 +28,19 @@ export const SUMMONER_ADDRESS = Address.fromString(
   '{{ summoner_address }}{{^summoner_address}}0x0000000000000000000000000000000000000000{{/summoner_address}}'
 )
 
-export const ENCHANT_ADDRESS = Address.fromString(
-  '{{ enchant_address }}{{^enchant_address}}0x0000000000000000000000000000000000000000{{/spell_bound_address}}'
-)
-
-export const SEANCE_CIRCLE_ADDRESS = Address.fromString(
-  '{{ seance_circle_address }}{{^seance_circle_address}}0x0000000000000000000000000000000000000000{{/seance_circle_address}}'
-)
-
 export const SOUL_ADDRESS = Address.fromString(
   '{{ soul_address }}{{^soul_address}}0x0000000000000000000000000000000000000000{{/soul_address}}'
 )
 
 export const SOUL_USDC_PAIR_ADDRESS = Address.fromString(
-  '{{ soul_usdt_pair_address }}{{^soul_usdt_pair_address}}0x0000000000000000000000000000000000000000{{/soul_usdt_pair_address}}'
-)
-
-export const SEANCE_USDC_PAIR_ADDRESS = Address.fromString(
-  '{{ seance_usdc_pair_address }}{{^seance_usdc_pair_address}}0x0000000000000000000000000000000000000000{{/seance_usdc_pair_address}}'
-)
-
-export const SEANCE_WETH_PAIR_ADDRESS = Address.fromString(
-  '{{ seance_weth_pair_address }}{{^seance_weth_pair_address}}0x0000000000000000000000000000000000000000{{/seance_weth_pair_address}}'
+  '{{ soul_usdc_pair_address }}{{^soul_usdc_pair_address}}0x0000000000000000000000000000000000000000{{/soul_usdc_pair_address}}'
 )
 
 export const USDC_WETH_PAIR =
   '{{ usdc_weth_pair }}{{^usdc_weth_pair}}0x0000000000000000000000000000000000000000{{/usdc_weth_pair}}'
 
 export const SOUL_USDC_PAIR =
-  '{{ soul_usdt_pair }}{{^soul_usdt_pair}}0x0000000000000000000000000000000000000000{{/soul_usdt_pair}}'
+  '{{ soul_usdc_pair }}{{^soul_usdc_pair}}0x0000000000000000000000000000000000000000{{/soul_usdc_pair}}'
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
 export const MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString(
@@ -78,7 +55,7 @@ export const WETH_ADDRESS = Address.fromString(
 )
 
 export const SOULSWAP_WETH_USDC_PAIR_ADDRESS = Address.fromString(
-  '{{ soulswap_weth_usdt_pair_address }}{{^soulswap_weth_usdt_pair_address}}0x0000000000000000000000000000000000000000{{/soulswap_weth_usdt_pair_address}}'
+  '{{ soulswap_weth_usdc_pair_address }}{{^soulswap_weth_usdc_pair_address}}0x0000000000000000000000000000000000000000{{/soulswap_weth_usdc_pair_address}}'
 )
 
 export const NATIVE = Address.fromString('{{ native_address }}{{^native_address}}0x0000000000000000000000000000000000000000{{/native_address}}')
