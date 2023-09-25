@@ -15,7 +15,7 @@
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 /soulswapfinance/avalanche-swap",
 
         "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/exchange subgraph.yaml",
-        "deploy:avalanche": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/avalanche-swap subgraph.yaml",
+        "deploy:avax": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ soulswapfinance/avalanche-swap subgraph.yaml",
 
         "deploy-studio:mainnet": "graph deploy --studio soul---mainnet-exchange",
         "deploy-studio:avalanche": "graph deploy --studio avalanche-swap",
