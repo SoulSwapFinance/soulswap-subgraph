@@ -12,7 +12,7 @@
   "scripts": {
     "codegen": ".",
     "build": ".",
-    "prepare:avalanche": ".",
+    "prepare:avax": ".",
     "prepare:mainnet": "."
   }
 }

@@ -9,7 +9,7 @@
     "build": "yarn workspaces run build",
     "codegen": "yarn workspaces run codegen",
     "prepare:mainnet": "yarn workspaces run prepare:mainnet",
-    "prepare:avalanche": "yarn workspaces run prepare:avalanche"
+    "prepare:avax": "yarn workspaces run prepare:avax"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.21.0",

@@ -113,7 +113,7 @@ export function getSoulPrice(block: ethereum.Block): BigDecimal {
       .div(reserves.value0.toBigDecimal())
       .div(BIG_DECIMAL_1E6);
     } else {
-      return null;
+      return new BigDecimal(BigInt.fromI32(0));
     }
   }
 }
